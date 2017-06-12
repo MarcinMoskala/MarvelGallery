@@ -2,9 +2,9 @@
 
 package com.naxtlevelofandroiddevelopment.marvelgallery
 
-import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presentation.character.CharacterProfilePresenter
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.CharacterProfileViewHelper
+import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCharacter
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -73,10 +73,5 @@ class CharacterPresenterUnitTest {
         presenter.onStart()
         assertTrue(displayedOccurrences != null)
         assertTrue(stringsItShouldUse.map(idAsString).all { id -> id in displayedOccurrences!! })
-    }
-
-    companion object {
-
-        private val exampleCharacter = MarvelCharacter("Name1", "ImageUrl1", "Description1", listOf("A", "E", "GHI"), listOf("B", "F", "JK LM"), listOf("C"), listOf("D"))
     }
 }

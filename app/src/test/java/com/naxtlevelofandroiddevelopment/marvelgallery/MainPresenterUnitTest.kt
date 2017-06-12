@@ -6,6 +6,7 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.network.MarvelRepository
 import com.naxtlevelofandroiddevelopment.marvelgallery.network.Rx
 import com.naxtlevelofandroiddevelopment.marvelgallery.presentation.main.MainPresenter
+import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCharacterList
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.MainViewHelper
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.MarvelRepositoryHelper
 import io.reactivex.Single
@@ -62,12 +63,4 @@ class MainPresenterUnitTest {
     }
 
     fun fail(): Nothing = throw Error("Assertion failed")
-
-    companion object {
-
-        private val exampleCharacterList = listOf(
-                MarvelCharacter("Name1", "ImageUrl1", "Description1", listOf("A"), listOf("B"), listOf("C"), listOf("D")),
-                MarvelCharacter("Name2", "ImageUrl2", "Description2", listOf("E"), listOf("F"), listOf("G"), listOf("H"))
-        )
-    }
 }
