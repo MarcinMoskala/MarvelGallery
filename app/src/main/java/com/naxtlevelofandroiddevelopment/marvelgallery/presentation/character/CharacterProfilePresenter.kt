@@ -4,7 +4,7 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.R
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presentation.common.Presenter
 
-class HeroProfilePresenter(val view: HeroProfileView, val character: MarvelCharacter) : Presenter() {
+class CharacterProfilePresenter(val view: CharacterProfileView, val character: MarvelCharacter) : Presenter() {
 
     private val htmlPoint = "&#8226;"
     private val htmlEnter = "<br/>"

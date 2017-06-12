@@ -8,11 +8,11 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presentation.common.*
 import kotlinx.android.synthetic.main.activity_character_profile.*
 
-class CharacterProfileActivity : PresenterBaseActivity(), HeroProfileView {
+class CharacterProfileActivity : PresenterBaseActivity(), CharacterProfileView {
 
     val character: MarvelCharacter by extra(CHARACTER_ARG)
 
-    override val presenter by lazy { HeroProfilePresenter(this, character) }
+    override val presenter by lazy { CharacterProfilePresenter(this, character) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
