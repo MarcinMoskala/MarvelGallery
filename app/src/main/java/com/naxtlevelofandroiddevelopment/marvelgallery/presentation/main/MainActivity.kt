@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Window
-import com.naxtlevelofandroiddevelopment.marvelgallery.BuildConfig
 import com.naxtlevelofandroiddevelopment.marvelgallery.R
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presentation.character.CharacterProfileActivity
@@ -35,10 +34,7 @@ class MainActivity : PresenterBaseActivity(), MainView {
 
     override fun showError(error: Throwable) {
         toast("Error: ${error.message}")
-        if (BuildConfig.DEBUG) {
-            error.printStackTrace()
-            error.cause?.printStackTrace()
-        }
+        error.printStackTrace()
     }
 
     private fun createCategoryItemAdapter(character: MarvelCharacter)
