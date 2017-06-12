@@ -9,7 +9,7 @@ class CharacterProfilePresenter(val view: CharacterProfileView, val character: M
     private val htmlPoint = "&#8226;"
     private val htmlEnter = "<br/>"
 
-    override fun onStart() {
+    fun onViewCreated() {
         view.setUpCharacterImage(character.imageUrl)
         view.setUpCharacterData(
                 name = character.name,

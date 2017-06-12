@@ -6,12 +6,7 @@ abstract class Presenter {
 
     var subscriptions = CompositeDisposable()
 
-    // Here view might not be loaded yet
-    open fun onCreate() {}
-
-    open fun onStart() {}
-
-    open fun onDestroy() {
+    fun onActivityDestroy() {
         subscriptions.clear()
     }
 }

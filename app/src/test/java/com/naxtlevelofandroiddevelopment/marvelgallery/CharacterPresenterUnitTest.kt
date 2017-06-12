@@ -19,7 +19,7 @@ class CharacterPresenterUnitTest {
                 }
         )
         val presenter = CharacterProfilePresenter(view, exampleCharacter)
-        presenter.onStart()
+        presenter.onViewCreated()
         assertEquals(exampleCharacter.imageUrl, requestedImage)
     }
 
@@ -33,7 +33,7 @@ class CharacterPresenterUnitTest {
                 }
         )
         val presenter = CharacterProfilePresenter(view, exampleCharacter)
-        presenter.onStart()
+        presenter.onViewCreated()
         assertEquals(exampleCharacter.name, displayedName)
         assertEquals(exampleCharacter.description, displayedDescription)
     }
@@ -46,7 +46,7 @@ class CharacterPresenterUnitTest {
                 }
         )
         val presenter = CharacterProfilePresenter(view, exampleCharacter)
-        presenter.onStart()
+        presenter.onViewCreated()
         assertTrue(displayedOccurrences != null)
         assertTrue(exampleCharacter.comics.all { it in displayedOccurrences!! })
         assertTrue(exampleCharacter.series.all { it in displayedOccurrences!! })
@@ -70,7 +70,7 @@ class CharacterPresenterUnitTest {
                 onGetStringById = idAsString
         )
         val presenter = CharacterProfilePresenter(view, exampleCharacter)
-        presenter.onStart()
+        presenter.onViewCreated()
         assertTrue(displayedOccurrences != null)
         assertTrue(stringsItShouldUse.map(idAsString).all { id -> id in displayedOccurrences!! })
     }

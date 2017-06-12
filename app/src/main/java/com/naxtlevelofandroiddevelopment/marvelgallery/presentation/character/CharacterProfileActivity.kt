@@ -11,13 +11,13 @@ import kotlinx.android.synthetic.main.activity_character_profile.*
 class CharacterProfileActivity : PresenterBaseActivity(), CharacterProfileView {
 
     val character: MarvelCharacter by extra(CHARACTER_ARG)
-
     override val presenter by lazy { CharacterProfilePresenter(this, character) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character_profile)
         setUpToolbar()
+        presenter.onViewCreated()
     }
 
     override fun setUpCharacterImage(photoUrl: String) {

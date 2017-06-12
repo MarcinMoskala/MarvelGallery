@@ -23,10 +23,10 @@ class MainPresenterUnitTest {
     }
 
     @Test fun `After start, there is request for with null query`() {
-        checkSearchQuery(null) { onCreate() }
+        checkSearchQuery(null) { onViewCreated() }
     }
 
-    @Test fun `For blank text, there is request for with null query`() {
+    @Test fun `For blank text, there is request with null query`() {
         checkSearchQuery(null) { onSearchChanged("") }
         checkSearchQuery(null) { onSearchChanged("   ") }
         checkSearchQuery(null) { onSearchChanged("       ") }
@@ -45,7 +45,7 @@ class MainPresenterUnitTest {
                 onShowError = { fail() }
         )
         val mainPresenter = MainPresenter(view)
-        mainPresenter.onCreate()
+        mainPresenter.onViewCreated()
         assertEquals(exampleCharacterList, displayedList)
     }
 

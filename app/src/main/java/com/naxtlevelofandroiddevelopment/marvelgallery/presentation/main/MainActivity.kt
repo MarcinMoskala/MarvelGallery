@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : PresenterBaseActivity(), MainView {
 
     override var refresh by bindToSwipeRefresh(R.id.swipeRefreshView)
-    override val presenter: MainPresenter by lazy { MainPresenter(this) }
+    override val presenter by lazy { MainPresenter(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +25,7 @@ class MainActivity : PresenterBaseActivity(), MainView {
         recyclerView.layoutManager = GridLayoutManager(this, 2) as RecyclerView.LayoutManager
         swipeRefreshView.setOnRefreshListener { presenter.onSearchChanged(searchView.text.toString()) }
         searchView.addOnTextChangedListener { newText -> presenter.onSearchChanged(newText) }
+        presenter.onViewCreated()
     }
 
     override fun show(items: List<MarvelCharacter>) {
