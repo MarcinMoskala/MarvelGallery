@@ -2,6 +2,7 @@ package com.naxtlevelofandroiddevelopment.marvelgallery.network
 
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -26,4 +27,8 @@ fun <T> Single<T>.smartSubscribe(
 fun <T> Single<T>.addStartFinishActions(onStart: (() -> Unit)? = null, onFinish: (() -> Unit)? = null): Single<T> {
     onStart?.invoke()
     return doAfterTerminate { onFinish?.invoke() }
+}
+
+operator fun CompositeDisposable.plusAssign(disposable: Disposable) {
+    add(disposable)
 }

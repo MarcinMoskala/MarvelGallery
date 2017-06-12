@@ -2,6 +2,7 @@ package com.naxtlevelofandroiddevelopment.marvelgallery.presentation.main
 
 import com.naxtlevelofandroiddevelopment.marvelgallery.network.MarvelRepository
 import com.naxtlevelofandroiddevelopment.marvelgallery.network.applySchedulers
+import com.naxtlevelofandroiddevelopment.marvelgallery.network.plusAssign
 import com.naxtlevelofandroiddevelopment.marvelgallery.network.smartSubscribe
 import com.naxtlevelofandroiddevelopment.marvelgallery.presentation.common.Presenter
 

@@ -1,10 +1,10 @@
 package com.naxtlevelofandroiddevelopment.marvelgallery.presentation.common
 
-import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
 
 abstract class Presenter {
 
-    var subscriptions: List<Disposable> = emptyList()
+    var subscriptions = CompositeDisposable()
 
     // Here view might not be loaded yet
     open fun onCreate() {}
@@ -12,6 +12,6 @@ abstract class Presenter {
     open fun onStart() {}
 
     open fun onDestroy() {
-        subscriptions.forEach { it.dispose() }
+        subscriptions.clear()
     }
 }

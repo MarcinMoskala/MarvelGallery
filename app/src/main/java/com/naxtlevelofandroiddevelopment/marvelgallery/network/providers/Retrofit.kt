@@ -14,7 +14,6 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.concurrent.TimeUnit
 
-
 object RetrofitApi : Provider<Retrofit>({
     makeRetrofit(addRequiredQuery())
 })
