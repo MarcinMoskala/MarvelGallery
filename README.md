@@ -15,4 +15,4 @@ In application there is characters gallery, based on RecyclerView, and search ba
 
 To start an application you need to go to [Marvel Developer Portal](https://developer.marvel.com/), make account and get private and public key. Then you need to replace REPLEACE_WITH_YOUR_PUBLIC_MARVEL_KEY and REPLEACE_WITH_YOUR_PRIVATE_MARVEL_KEY in `gradle.properties` with your keys. It is enough to start and test application on AndroidStudio. 
 
-To set up key, and still be able to commit all files without exposing them, you can place them inside module `gradle.properties` (inside `app` folder). It is already in `git.ignore`, so you will be able commit all files and it won't be included. (Do not copy file, only its content. Create new file!)
+To set up key, and still be able to commit all files without exposing them, you can place them inside module `gradle.properties` (inside `app` folder). It is already in `.gitignore`, so you will be able commit all files and it won't be included. (Do not copy file, only its content. Create new file!)
