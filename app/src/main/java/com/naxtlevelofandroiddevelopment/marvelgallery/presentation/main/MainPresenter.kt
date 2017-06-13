@@ -19,7 +19,7 @@ class MainPresenter(val view: MainView) : Presenter() {
     }
 
     private fun loadCharacters(search: String? = null) {
-        val qualifiedSearchQuery = if (search == null || search.isBlank()) null else search
+        val qualifiedSearchQuery = if (search.isNullOrBlank()) null else search
         subscriptions += repository
                 .getCharacters(qualifiedSearchQuery)
                 .applySchedulers()

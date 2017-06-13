@@ -6,7 +6,7 @@ abstract class Presenter {
 
     var subscriptions = CompositeDisposable()
 
-    fun onActivityDestroy() {
-        subscriptions.clear()
+    fun onViewDestroyed() {
+        subscriptions.dispose()
     }
 }

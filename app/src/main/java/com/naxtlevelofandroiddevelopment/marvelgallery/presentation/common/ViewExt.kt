@@ -13,16 +13,10 @@ import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 
-fun ImageView.loadImage(photoUrl: String) {
+fun ImageView.loadImage(photoUrl: String, centerCropped: Boolean = false) {
     Glide.with(context)
             .load(photoUrl)
-            .into(this)
-}
-
-fun ImageView.loadImageCenterCropped(photoUrl: String) {
-    Glide.with(context)
-            .load(photoUrl)
-            .centerCrop()
+            .apply { if (centerCropped) centerCrop() }
             .into(this)
 }
 

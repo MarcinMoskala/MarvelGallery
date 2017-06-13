@@ -8,6 +8,6 @@ abstract class PresenterBaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.onActivityDestroy()
+        presenter.onViewDestroyed()
     }
 }

@@ -21,7 +21,7 @@ class CharacterProfileActivity : PresenterBaseActivity(), CharacterProfileView {
     }
 
     override fun setUpCharacterImage(photoUrl: String) {
-        headerView.loadImageCenterCropped(photoUrl)
+        headerView.loadImage(photoUrl, centerCropped = true)
     }
 
     override fun setUpCharacterData(name: String, description: String, occurrences: String) {
