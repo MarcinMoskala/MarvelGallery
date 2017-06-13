@@ -1,6 +1,5 @@
 package com.naxtlevelofandroiddevelopment.marvelgallery
 
-
 import android.content.Intent
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.NoMatchingViewException
@@ -21,7 +20,6 @@ import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)

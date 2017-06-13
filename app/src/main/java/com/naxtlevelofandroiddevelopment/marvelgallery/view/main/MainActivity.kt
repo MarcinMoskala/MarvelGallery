@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Window
 import com.naxtlevelofandroiddevelopment.marvelgallery.R
+import com.naxtlevelofandroiddevelopment.marvelgallery.data.MarvelRepository
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.MainPresenter
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.character.CharacterProfileActivity
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivityWithPresenter(), MainView {
 
     override var refresh by bindToSwipeRefresh(R.id.swipeRefreshView)
-    override val presenter by lazy { MainPresenter(this) }
+    override val presenter by lazy { MainPresenter(this, MarvelRepository.get()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

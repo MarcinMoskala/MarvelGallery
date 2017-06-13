@@ -3,6 +3,7 @@ package com.naxtlevelofandroiddevelopment.marvelgallery.data.network.providers
 import android.util.Log
 import com.google.gson.Gson
 import com.naxtlevelofandroiddevelopment.marvelgallery.BuildConfig
+import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.Provider
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

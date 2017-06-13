@@ -2,7 +2,6 @@
 
 package com.naxtlevelofandroiddevelopment.marvelgallery
 
-import com.naxtlevelofandroiddevelopment.marvelgallery.data.MarvelRepository
 import com.naxtlevelofandroiddevelopment.marvelgallery.data.network.Rx
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.MainPresenter
@@ -39,25 +38,25 @@ class MainPresenterUnitTest {
 
     @Test fun `Returned list is shown`() {
         var displayedList: List<MarvelCharacter>? = null
-        MarvelRepository.override = MarvelRepositoryHelper { Single.just(exampleCharacterList) }
         val view = MainViewHelper(
                 onShow = { displayedList = it },
                 onShowError = { fail() }
         )
-        val mainPresenter = MainPresenter(view)
+        val marvelRepository = MarvelRepositoryHelper { Single.just(exampleCharacterList) }
+        val mainPresenter = MainPresenter(view, marvelRepository)
         mainPresenter.onViewCreated()
         assertEquals(exampleCharacterList, displayedList)
     }
 
     fun checkSearchQuery(expectedQuery: String?, actionsOnPresenter: MainPresenter.() -> Unit) {
         var checkApplied = false
-        MarvelRepository.override = MarvelRepositoryHelper { searchQuery ->
+        val view = MainViewHelper(onShowError = { fail() })
+        val marvelRepository = MarvelRepositoryHelper { searchQuery ->
             assertEquals(expectedQuery, searchQuery)
             checkApplied = true
             Single.never()
         }
-        val view = MainViewHelper(onShowError = { fail() })
-        val mainPresenter = MainPresenter(view)
+        val mainPresenter = MainPresenter(view, marvelRepository)
         mainPresenter.actionsOnPresenter()
         assertTrue(checkApplied)
     }

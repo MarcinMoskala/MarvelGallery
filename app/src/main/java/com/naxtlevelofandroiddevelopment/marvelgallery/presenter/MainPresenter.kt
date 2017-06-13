@@ -6,9 +6,7 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.data.network.plusAssign
 import com.naxtlevelofandroiddevelopment.marvelgallery.data.network.smartSubscribe
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.main.MainView
 
-class MainPresenter(val view: MainView) : BasePresenter() {
-
-    private val repository by MarvelRepository.lazyGet()
+class MainPresenter(val view: MainView, val repository: MarvelRepository) : BasePresenter() {
 
     fun onViewCreated() {
         loadCharacters()
