@@ -24,7 +24,7 @@
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/headerView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/character_header_height"
                 android:background="@color/colorPrimaryDark"
                 app:layout_collapseMode="parallax" />
 
@@ -50,24 +50,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusableInTouchMode="true"
-            android:orientation="vertical"
-            android:paddingBottom="14dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/descriptionView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="10dp"
-                android:textSize="20sp"
+                android:padding="@dimen/character_description_padding"
+                android:textSize="@dimen/standard_text_size"
                 tools:text="This is some long text that will be visible as an character description." />
 
             <TextView
                 android:id="@+id/occurrencesView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="20sp"
+                android:padding="@dimen/character_description_padding"
+                android:textSize="@dimen/standard_text_size"
                 tools:text="He was in following comics:\n* KOKOKO \n* KOKOKO \n* KOKOKO \n* KOKOKO \n* KOKOKO \n* KOKOKO \n* KOKOKO \n* KOKOKO \n* KOKOKO \n* KOKOKO \n* KOKOKO " />
         </LinearLayout>
 
