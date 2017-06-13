@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".presentation.main.MainActivity"
+            android:name=".view.main.MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.character.CharacterProfileActivity"
+            android:name=".view.character.CharacterProfileActivity"
             android:theme="@style/AppFullScreenTheme" />
     </application>
 

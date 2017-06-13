@@ -1,4 +1,4 @@
-<com.naxtlevelofandroiddevelopment.marvelgallery.presentation.views.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.naxtlevelofandroiddevelopment.marvelgallery.view.views.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,4 +27,4 @@
         android:textColor="@android:color/white"
         android:textSize="18sp"
         tools:text="Leage of Legends game quiz" />
-</com.naxtlevelofandroiddevelopment.marvelgallery.presentation.views.SquareFrameLayout>
+</com.naxtlevelofandroiddevelopment.marvelgallery.view.views.SquareFrameLayout>

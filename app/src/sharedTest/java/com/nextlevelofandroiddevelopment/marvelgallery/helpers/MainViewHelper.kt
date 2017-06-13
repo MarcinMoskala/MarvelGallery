@@ -1,7 +1,7 @@
 package com.nextlevelofandroiddevelopment.marvelgallery.helpers
 
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
-import com.naxtlevelofandroiddevelopment.marvelgallery.presentation.main.MainView
+import com.naxtlevelofandroiddevelopment.marvelgallery.view.main.MainView
 
 class MainViewHelper(
         val onShow: (items: List<MarvelCharacter>) -> Unit = {},

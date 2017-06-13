@@ -1,6 +1,6 @@
 package com.nextlevelofandroiddevelopment.marvelgallery.helpers
 
-import com.naxtlevelofandroiddevelopment.marvelgallery.presentation.character.CharacterProfileView
+import com.naxtlevelofandroiddevelopment.marvelgallery.view.character.CharacterProfileView
 
 class CharacterProfileViewHelper(
         val onSetUpCharacterImage: (photoUrl: String) -> Unit = {},

@@ -2,7 +2,7 @@
 
 package com.naxtlevelofandroiddevelopment.marvelgallery
 
-import com.naxtlevelofandroiddevelopment.marvelgallery.presentation.character.CharacterProfilePresenter
+import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.CharacterProfilePresenter
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.CharacterProfileViewHelper
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCharacter
 import org.junit.Assert.assertEquals

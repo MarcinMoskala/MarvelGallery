@@ -11,8 +11,8 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.test.suitebuilder.annotation.LargeTest
-import com.naxtlevelofandroiddevelopment.marvelgallery.network.MarvelRepository
-import com.naxtlevelofandroiddevelopment.marvelgallery.presentation.main.MainActivity
+import com.naxtlevelofandroiddevelopment.marvelgallery.data.MarvelRepository
+import com.naxtlevelofandroiddevelopment.marvelgallery.view.main.MainActivity
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCharacter
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCharacterList
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.MarvelRepositoryHelper

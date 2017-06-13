@@ -2,10 +2,10 @@
 
 package com.naxtlevelofandroiddevelopment.marvelgallery
 
+import com.naxtlevelofandroiddevelopment.marvelgallery.data.MarvelRepository
+import com.naxtlevelofandroiddevelopment.marvelgallery.data.network.Rx
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
-import com.naxtlevelofandroiddevelopment.marvelgallery.network.MarvelRepository
-import com.naxtlevelofandroiddevelopment.marvelgallery.network.Rx
-import com.naxtlevelofandroiddevelopment.marvelgallery.presentation.main.MainPresenter
+import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.MainPresenter
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCharacterList
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.MainViewHelper
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.MarvelRepositoryHelper

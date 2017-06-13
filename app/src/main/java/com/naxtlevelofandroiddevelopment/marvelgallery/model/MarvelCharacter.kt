@@ -1,6 +1,6 @@
 package com.naxtlevelofandroiddevelopment.marvelgallery.model
 
-import com.naxtlevelofandroiddevelopment.marvelgallery.network.dto.CharacterMarvelDto
+import com.naxtlevelofandroiddevelopment.marvelgallery.data.network.dto.CharacterMarvelDto
 import nz.bradcampbell.paperparcel.PaperParcel
 import nz.bradcampbell.paperparcel.PaperParcelable
 
