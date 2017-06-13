@@ -9,7 +9,7 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.CharacterProfil
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.*
 import kotlinx.android.synthetic.main.activity_character_profile.*
 
-class CharacterProfileActivity : PresenterBaseActivity(), CharacterProfileView {
+class CharacterProfileActivity : BaseActivityWithPresenter(), CharacterProfileView {
 
     val character: MarvelCharacter by extra(CHARACTER_ARG)
     override val presenter by lazy { CharacterProfilePresenter(this, character) }

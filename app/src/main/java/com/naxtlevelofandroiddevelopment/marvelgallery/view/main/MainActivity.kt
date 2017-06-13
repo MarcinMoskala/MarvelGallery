@@ -8,13 +8,13 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.R
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.MainPresenter
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.character.CharacterProfileActivity
-import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.PresenterBaseActivity
+import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.BaseActivityWithPresenter
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.addOnTextChangedListener
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.bindToSwipeRefresh
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : PresenterBaseActivity(), MainView {
+class MainActivity : BaseActivityWithPresenter(), MainView {
 
     override var refresh by bindToSwipeRefresh(R.id.swipeRefreshView)
     override val presenter by lazy { MainPresenter(this) }
