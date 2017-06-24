@@ -17,13 +17,4 @@ class AuthParamTest {
         )
         assertEquals("1746d867a61971a5f4a3f734401a95f8", authParam)
     }
-
-    @Test
-    fun `Param size is always 16`() {
-        val randomKeys = listOf("", "XX", "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-        val randomTimeStamps = listOf(0, 1000, 1000000000000)
-
-        for (key in randomKeys) for (ts in randomTimeStamps)
-            assert(calculatedMd5AuthParameter(ts, key, key).length == 16)
-    }
 }
