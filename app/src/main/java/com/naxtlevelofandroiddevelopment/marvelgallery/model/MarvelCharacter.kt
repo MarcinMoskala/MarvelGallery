@@ -1,10 +1,9 @@
 package com.naxtlevelofandroiddevelopment.marvelgallery.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.naxtlevelofandroiddevelopment.marvelgallery.data.network.dto.CharacterMarvelDto
-import nz.bradcampbell.paperparcel.PaperParcel
-import nz.bradcampbell.paperparcel.PaperParcelable
 
-@PaperParcel
 data class MarvelCharacter(
         val name: String,
         val imageUrl: String,
@@ -13,7 +12,7 @@ data class MarvelCharacter(
         val series: List<String>,
         val stories: List<String>,
         val events: List<String>
-) : PaperParcelable {
+) : Parcelable {
 
     constructor(dto: CharacterMarvelDto) : this(
             name = dto.name,
@@ -25,7 +24,34 @@ data class MarvelCharacter(
             events = dto.events.items.map { it.name }
     )
 
+    constructor(source: Parcel) : this(
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.createStringArrayList(),
+            source.createStringArrayList(),
+            source.createStringArrayList(),
+            source.createStringArrayList()
+    )
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        with(dest) {
+            writeString(name)
+            writeString(imageUrl)
+            writeString(description)
+            writeStringList(comics)
+            writeStringList(series)
+            writeStringList(stories)
+            writeStringList(events)
+        }
+    }
+
     companion object {
-        @JvmField val CREATOR = PaperParcelable.Creator(MarvelCharacter::class.java)
+        @JvmField val CREATOR: Parcelable.Creator<MarvelCharacter> = object : Parcelable.Creator<MarvelCharacter> {
+            override fun createFromParcel(source: Parcel): MarvelCharacter = MarvelCharacter(source)
+            override fun newArray(size: Int): Array<MarvelCharacter?> = arrayOfNulls(size)
+        }
     }
 }

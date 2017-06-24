@@ -50,11 +50,6 @@ dependencies {
     compile "com.android.support:support-v4:$android_support_version"
     compile "com.android.support:recyclerview-v7:$android_support_version"
 
-    // PaperParcel - used to simplify making objects parcelable
-    compile(["com.github.grandstaish.paperparcel:paperparcel:$paperparcel_version",
-             "com.github.grandstaish.paperparcel:paperparcel-kotlin:$paperparcel_version"])
-    kapt "com.github.grandstaish.paperparcel:compiler:$paperparcel_version"
-
     // Glide - used for image loading
     compile "com.github.bumptech.glide:glide:$glide_version"
 

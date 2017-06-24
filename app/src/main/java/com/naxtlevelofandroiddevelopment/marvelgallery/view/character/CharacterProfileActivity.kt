@@ -1,6 +1,7 @@
 package com.naxtlevelofandroiddevelopment.marvelgallery.view.character
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import com.naxtlevelofandroiddevelopment.marvelgallery.R
@@ -45,12 +46,17 @@ class CharacterProfileActivity : BaseActivityWithPresenter(), CharacterProfileVi
 
     companion object {
 
-        val CHARACTER_ARG = "com.naxtlevelofandroiddevelopment.marvelgallery.presentation.heroprofile.CharacterArgKey"
+        private val CHARACTER_ARG = "com.naxtlevelofandroiddevelopment.marvelgallery.presentation.heroprofile.CharacterArgKey"
+
+        fun getPureIntent(character: MarvelCharacter): Intent = Intent()
+                .apply { putExtra(CHARACTER_ARG, character) }
+
+        fun getIntent(context: Context, character: MarvelCharacter): Intent = context
+                .getIntent<CharacterProfileActivity>()
+                .apply { putExtra(CHARACTER_ARG, character) }
 
         fun start(context: Context, character: MarvelCharacter) {
-            val intent = context.getIntent<CharacterProfileActivity>().apply {
-                putExtra(CHARACTER_ARG, character)
-            }
+            val intent = getIntent(context, character)
             context.startActivity(intent)
         }
     }

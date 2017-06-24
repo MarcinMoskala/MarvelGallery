@@ -3,12 +3,15 @@ package com.naxtlevelofandroiddevelopment.marvelgallery
 import android.content.Intent
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.NoMatchingViewException
+import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.action.ViewActions.closeSoftKeyboard
 import android.support.test.espresso.action.ViewActions.replaceText
 import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.support.v7.widget.RecyclerView
 import android.test.suitebuilder.annotation.LargeTest
 import com.naxtlevelofandroiddevelopment.marvelgallery.data.MarvelRepository
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.main.MainActivity
@@ -28,13 +31,14 @@ class MainActivityTest {
     @Rule @JvmField val activityTestRule = ActivityTestRule(MainActivity::class.java, false, false)
 
     @Test
-    fun mainActivityTest() {
-        MarvelRepository.override = BaseMarvelRepository(
-                onGetCharacters = { query -> Single.just(exampleCharacterList.filter { query == null || query in it.name }) }
-        )
-
-        activityTestRule.launchActivity(Intent())
+    fun There_is_character_list_visible() {
+        startWithDefaultFilteringRepository()
         assertIsVisibleText(exampleCharacter.name)
+    }
+
+    @Test
+    fun I_see_only_searched_character_after_I_type_its_name_in_search_view() {
+        startWithDefaultFilteringRepository()
 
         onView(withId(R.id.searchView)).perform(replaceText(exampleCharacter.name.take(4)), closeSoftKeyboard())
         assertIsVisibleText(exampleCharacter.name)
@@ -43,6 +47,21 @@ class MainActivityTest {
         assert(randomText !in exampleCharacter.name)
         onView(withId(R.id.searchView)).perform(replaceText(randomText), closeSoftKeyboard())
         assertIsNotVisibleText(exampleCharacter.name)
+    }
+
+    @Test
+    fun On_character_clicked_there_is_character_activity_opened() {
+        startWithDefaultFilteringRepository()
+
+        onView(withId(R.id.recyclerView)).perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
+        onView(withId(R.id.character_detail_layout)).check(matches(isDisplayed()))
+    }
+
+    private fun startWithDefaultFilteringRepository() {
+        MarvelRepository.override = BaseMarvelRepository(
+                onGetCharacters = { query -> Single.just(exampleCharacterList.filter { query == null || query in it.name }) }
+        )
+        activityTestRule.launchActivity(Intent())
     }
 
     fun assertIsVisibleText(text: String) {
