@@ -6,7 +6,7 @@ import io.reactivex.Single
 
 class MarvelRepositoryImpl(val api: MarvelApi) : MarvelRepository {
 
-    override fun getCharacters(searchQuery: String?): Single<List<MarvelCharacter>> = api.getCharacters(
+    override fun getAllCharacters(searchQuery: String?): Single<List<MarvelCharacter>> = api.getCharacters(
             offset = 0,
             limit = elementsOnListLimit,
             searchQuery = searchQuery

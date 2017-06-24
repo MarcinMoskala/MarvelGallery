@@ -8,7 +8,7 @@ import io.reactivex.Single
 
 interface MarvelRepository {
 
-    fun getCharacters(searchQuery: String?): Single<List<MarvelCharacter>>
+    fun getAllCharacters(searchQuery: String?): Single<List<MarvelCharacter>>
 
     companion object : Provider<MarvelRepository>({
         MarvelRepositoryImpl(RetrofitApi.get().create(MarvelApi::class.java))

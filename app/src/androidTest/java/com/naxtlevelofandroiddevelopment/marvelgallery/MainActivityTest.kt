@@ -12,9 +12,9 @@ import android.support.test.runner.AndroidJUnit4
 import android.test.suitebuilder.annotation.LargeTest
 import com.naxtlevelofandroiddevelopment.marvelgallery.data.MarvelRepository
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.main.MainActivity
+import com.nextlevelofandroiddevelopment.marvelgallery.helpers.BaseMarvelRepository
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCharacter
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCharacterList
-import com.nextlevelofandroiddevelopment.marvelgallery.helpers.MarvelRepositoryHelper
 import io.reactivex.Single
 import org.hamcrest.Matchers.not
 import org.junit.Rule
@@ -29,7 +29,7 @@ class MainActivityTest {
 
     @Test
     fun mainActivityTest() {
-        MarvelRepository.override = MarvelRepositoryHelper(
+        MarvelRepository.override = BaseMarvelRepository(
                 onGetCharacters = { query -> Single.just(exampleCharacterList.filter { query == null || query in it.name }) }
         )
 

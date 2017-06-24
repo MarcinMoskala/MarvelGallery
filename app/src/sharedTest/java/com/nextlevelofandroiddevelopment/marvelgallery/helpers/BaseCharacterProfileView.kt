@@ -2,7 +2,7 @@ package com.nextlevelofandroiddevelopment.marvelgallery.helpers
 
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.character.CharacterProfileView
 
-class CharacterProfileViewHelper(
+class BaseCharacterProfileView(
         val onSetUpCharacterImage: (photoUrl: String) -> Unit = {},
         val onSetUpCharacterData: (name: String, description: String, occurrences: String) -> Unit = { n, d, o -> },
         val onGetStringById: (id: Int) -> String = { "" }

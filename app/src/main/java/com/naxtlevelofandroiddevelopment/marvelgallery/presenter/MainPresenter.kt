@@ -19,7 +19,7 @@ class MainPresenter(val view: MainView, val repository: MarvelRepository) : Base
     private fun loadCharacters(search: String? = null) {
         val qualifiedSearchQuery = if (search.isNullOrBlank()) null else search
         subscriptions += repository
-                .getCharacters(qualifiedSearchQuery)
+                .getAllCharacters(qualifiedSearchQuery)
                 .applySchedulers()
                 .retry()
                 .smartSubscribe(

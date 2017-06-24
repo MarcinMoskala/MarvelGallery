@@ -4,9 +4,9 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.data.MarvelRepository
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import io.reactivex.Single
 
-class MarvelRepositoryHelper(
+class BaseMarvelRepository(
         val onGetCharacters: (String?) -> Single<List<MarvelCharacter>>
 ) : MarvelRepository {
 
-    override fun getCharacters(searchQuery: String?): Single<List<MarvelCharacter>> = onGetCharacters(searchQuery)
+    override fun getAllCharacters(searchQuery: String?): Single<List<MarvelCharacter>> = onGetCharacters(searchQuery)
 }
