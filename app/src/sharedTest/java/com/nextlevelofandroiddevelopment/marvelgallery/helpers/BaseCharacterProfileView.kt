@@ -4,7 +4,7 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.view.character.CharacterP
 
 class BaseCharacterProfileView(
         val onSetUpCharacterImage: (photoUrl: String) -> Unit = {},
-        val onSetUpCharacterData: (name: String, description: String, occurrences: String) -> Unit = { n, d, o -> },
+        val onSetUpCharacterData: (name: String, description: String, occurrences: String) -> Unit = { _, _, _ -> },
         val onGetStringById: (id: Int) -> String = { "" }
 ) : CharacterProfileView {
 
