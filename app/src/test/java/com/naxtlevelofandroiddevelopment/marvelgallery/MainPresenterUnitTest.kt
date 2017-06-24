@@ -2,24 +2,27 @@
 
 package com.naxtlevelofandroiddevelopment.marvelgallery
 
-import com.naxtlevelofandroiddevelopment.marvelgallery.data.network.Rx
-import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.MainPresenter
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.BaseMainView
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.BaseMarvelRepository
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCharacterList
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.fail
 import io.reactivex.Single
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.schedulers.Schedulers
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import java.util.concurrent.Semaphore
+import java.util.concurrent.TimeUnit.SECONDS
+
 
 class MainPresenterUnitTest {
 
     @Before
     fun setUp() {
-        Rx.unitTestMode = true
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.io() }
     }
 
     @Test
@@ -42,15 +45,18 @@ class MainPresenterUnitTest {
 
     @Test
     fun `Returned list is shown`() {
-        var displayedList: List<MarvelCharacter>? = null
+        val sem = Semaphore(0)
         val view = BaseMainView(
-                onShow = { displayedList = it },
+                onShow = { list ->
+                    assertEquals(exampleCharacterList, list)
+                    sem.release()
+                },
                 onShowError = { fail() }
         )
         val marvelRepository = BaseMarvelRepository { Single.just(exampleCharacterList) }
         val mainPresenter = MainPresenter(view, marvelRepository)
         mainPresenter.onViewCreated()
-        assertEquals(exampleCharacterList, displayedList)
+        sem.tryAcquire(1, SECONDS)
     }
 
     private class PresenterActionAssertion(val actionOnPresenter: MainPresenter.() -> Unit) {

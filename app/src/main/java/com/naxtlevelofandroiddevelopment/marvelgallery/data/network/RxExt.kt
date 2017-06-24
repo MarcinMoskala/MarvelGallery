@@ -6,14 +6,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-object Rx {
-    var unitTestMode = false
-}
-
-fun <T> Single<T>.applySchedulers(): Single<T> = if (Rx.unitTestMode) this else
-    subscribeOn(Schedulers.io())
-            .unsubscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+fun <T> Single<T>.applySchedulers(): Single<T> = this
+        .subscribeOn(Schedulers.io())
+        .unsubscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
 
 fun <T> Single<T>.smartSubscribe(
         onStart: (() -> Unit)? = null,
