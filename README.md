@@ -1,5 +1,6 @@
 # Marvel Gallery
 
+[![CircleCI](https://circleci.com/gh/MarcinMoskala/MarvelGallery.svg?style=svg)](https://circleci.com/gh/MarcinMoskala/MarvelGallery)
 [![codebeat badge](https://codebeat.co/badges/7c7f9612-d562-43df-a676-70969e52bbd7)](https://codebeat.co/projects/github-com-marcinmoskala-marvelgallery-master)
 
 Simple application, that is showing how Kotlin can be used to make Android development simpler and easier.
