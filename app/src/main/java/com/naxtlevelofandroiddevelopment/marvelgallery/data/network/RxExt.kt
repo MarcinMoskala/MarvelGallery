@@ -15,10 +15,9 @@ fun <T> Single<T>.smartSubscribe(
         onStart: (() -> Unit)? = null,
         onError: ((Throwable) -> Unit)? = null,
         onFinish: (() -> Unit)? = null,
-        onSuccess: (T) -> Unit = {}
+        onSuccess: (T) -> Unit
 ): Disposable =
-        addStartFinishActions(onStart, onFinish)
-                .subscribe(onSuccess, { onError?.invoke(it) })
+        addStartFinishActions(onStart, onFinish).subscribe(onSuccess, { onError?.invoke(it) })
 
 fun <T> Single<T>.addStartFinishActions(onStart: (() -> Unit)? = null, onFinish: (() -> Unit)? = null): Single<T> {
     onStart?.invoke()

@@ -8,7 +8,7 @@ import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCh
 import org.junit.Assert.*
 import org.junit.Test
 
-class CharacterPresenterUnitTest {
+class CharacterPresenterTest {
 
     @Test
     fun `Image Url is requested to be shown as an image`() {

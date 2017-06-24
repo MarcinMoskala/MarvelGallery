@@ -18,7 +18,7 @@ import java.util.concurrent.Semaphore
 import java.util.concurrent.TimeUnit.SECONDS
 
 
-class MainPresenterUnitTest {
+class MainPresenterTest {
 
     @Before
     fun setUp() {
