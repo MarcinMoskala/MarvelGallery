@@ -10,7 +10,7 @@ interface MarvelRepository {
 
     fun getAllCharacters(searchQuery: String?): Single<List<MarvelCharacter>>
 
-    companion object : Provider<MarvelRepository>({
-        MarvelRepositoryImpl(RetrofitApi.get().create(MarvelApi::class.java))
-    })
+    companion object : Provider<MarvelRepository>() {
+        override fun creator() = MarvelRepositoryImpl(RetrofitApi.get().create(MarvelApi::class.java))
+    }
 }

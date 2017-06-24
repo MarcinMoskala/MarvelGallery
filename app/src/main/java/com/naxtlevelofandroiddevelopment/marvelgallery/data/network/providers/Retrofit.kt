@@ -15,9 +15,9 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.concurrent.TimeUnit
 
-object RetrofitApi : Provider<Retrofit>({
-    makeRetrofit(addRequiredQuery())
-})
+object RetrofitApi : Provider<Retrofit>() {
+    override fun creator(): Retrofit = makeRetrofit(addRequiredQuery())
+}
 
 fun makeRetrofit(vararg interceptors: Interceptor): Retrofit = Retrofit.Builder()
         .baseUrl("http://gateway.marvel.com/v1/public/")
@@ -86,4 +86,4 @@ fun getMd5Digest(str: String): ByteArray = try {
     byteArrayOf()
 }
 
-private operator fun String.times(i: Int) = (1..i).fold("", { acc, _ -> acc + this })
+private operator fun String.times(i: Int) = (1..i).fold("") { acc, _ -> acc + this }

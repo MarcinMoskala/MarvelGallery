@@ -1,10 +1,12 @@
 package com.naxtlevelofandroiddevelopment.marvelgallery.view.common
 
-abstract class Provider<T>(private val initializer: () -> T) {
+abstract class Provider<T> {
+
+    abstract fun creator(): T
 
     private var instance: T? = null
     var override: T? = null
 
-    fun get(): T = override ?: instance ?: initializer().apply { instance = this }
+    fun get(): T = override ?: instance ?: creator().apply { instance = this }
     fun lazyGet(): Lazy<T> = lazy { get() }
 }

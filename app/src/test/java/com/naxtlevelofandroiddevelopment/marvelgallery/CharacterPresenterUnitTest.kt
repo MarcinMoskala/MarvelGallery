@@ -5,8 +5,7 @@ package com.naxtlevelofandroiddevelopment.marvelgallery
 import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.CharacterProfilePresenter
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.BaseCharacterProfileView
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCharacter
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.junit.Assert.*
 import org.junit.Test
 
 class CharacterPresenterUnitTest {
@@ -50,7 +49,7 @@ class CharacterPresenterUnitTest {
         )
         val presenter = CharacterProfilePresenter(view, exampleCharacter)
         presenter.onViewCreated()
-        assertTrue(displayedOccurrences != null)
+        assertNotNull(displayedOccurrences)
         assertTrue(exampleCharacter.comics.all { it in displayedOccurrences!! })
         assertTrue(exampleCharacter.series.all { it in displayedOccurrences!! })
         assertTrue(exampleCharacter.stories.all { it in displayedOccurrences!! })
@@ -75,7 +74,7 @@ class CharacterPresenterUnitTest {
         )
         val presenter = CharacterProfilePresenter(view, exampleCharacter)
         presenter.onViewCreated()
-        assertTrue(displayedOccurrences != null)
+        assertNotNull(displayedOccurrences)
         assertTrue(stringsItShouldUse.map(idAsString).all { id -> id in displayedOccurrences!! })
     }
 }
