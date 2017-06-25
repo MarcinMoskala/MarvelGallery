@@ -1,9 +1,7 @@
 package com.naxtlevelofandroiddevelopment.marvelgallery.data.network.providers
 
-import android.util.Log
 import java.math.BigInteger
 import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 
 /**
  * Builds the required API "hash" parameter (timeStamp + privateKey + publicKey)
@@ -16,11 +14,8 @@ fun calculatedMd5AuthParameter(timeStamp: Long, privateKey: String, publicKey: S
     return "0" * (32 - md5.length) + md5
 }
 
-private fun getMd5Digest(str: String): ByteArray = try {
-    MessageDigest.getInstance("MD5").digest(str.toByteArray())
-} catch (e: NoSuchAlgorithmException) {
-    Log.e("DataManager", "Error hashing required parameters: " + e.message)
-    byteArrayOf()
-}
+// It is impossible to get NoSuchAlgorithmException, but if it will happen then we want it to
+// break application.
+private fun getMd5Digest(str: String): ByteArray = MessageDigest.getInstance("MD5").digest(str.toByteArray())
 
 private operator fun String.times(i: Int) = (1..i).fold("") { acc, _ -> acc + this }
