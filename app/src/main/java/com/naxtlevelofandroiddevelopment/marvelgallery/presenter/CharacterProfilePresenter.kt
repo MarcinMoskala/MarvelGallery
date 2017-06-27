@@ -19,13 +19,13 @@ class CharacterProfilePresenter(val view: CharacterProfileView, val character: M
     }
 
     private fun makeOccurrencesText(): String {
-        var occurencesText = ""
+        var occurrencesText = ""
 
         fun addListIfNotEmpty(introductionTextId: Int, list: List<String>) {
             if (list.isEmpty()) return
             val introductionText = view.getStringById(introductionTextId)
             val htmlList = list.toHtmlList()
-            occurencesText += "$introductionText $htmlEnter $htmlList $htmlEnter"
+            occurrencesText += "$introductionText $htmlEnter $htmlList $htmlEnter"
         }
 
         addListIfNotEmpty(R.string.occurrences_comics_list_introduction, character.comics)
@@ -33,7 +33,7 @@ class CharacterProfilePresenter(val view: CharacterProfileView, val character: M
         addListIfNotEmpty(R.string.occurrences_stories_list_introduction, character.stories)
         addListIfNotEmpty(R.string.occurrences_events_list_introduction, character.events)
 
-        return occurencesText
+        return occurrencesText
     }
 
     private fun List<String>.toHtmlList(): String = fold("") { acc, item -> "$acc$htmlPoint $item $htmlEnter" }
