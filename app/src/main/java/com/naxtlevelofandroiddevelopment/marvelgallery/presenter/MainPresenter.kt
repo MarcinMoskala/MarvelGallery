@@ -23,6 +23,7 @@ class MainPresenter(val view: MainView, val repository: MarvelRepository) : Base
                 .applySchedulers()
                 .retry()
                 .smartSubscribe(
+                        onStart = { view.refresh = true },
                         onSuccess = view::show,
                         onError = view::showError,
                         onFinish = { view.refresh = false }
