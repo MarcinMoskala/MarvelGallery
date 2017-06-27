@@ -45,9 +45,11 @@ class MainPresenterTest {
 
     @Test
     fun `Returned list is shown`() {
+        // Given
         val sem = Semaphore(0)
         val view = BaseMainView(
                 onShow = { list ->
+                    // Then
                     assertEquals(exampleCharacterList, list)
                     sem.release()
                 },
@@ -55,6 +57,7 @@ class MainPresenterTest {
         )
         val marvelRepository = BaseMarvelRepository { Single.just(exampleCharacterList) }
         val mainPresenter = MainPresenter(view, marvelRepository)
+        // When
         mainPresenter.onViewCreated()
         sem.tryAcquire(1, SECONDS)
     }

@@ -12,6 +12,7 @@ class CharacterPresenterTest {
 
     @Test
     fun `Image Url is requested to be shown as an image`() {
+        // Given
         var requestedImage: String? = null
         val view = BaseCharacterProfileView(
                 onSetUpCharacterImage = {
@@ -19,12 +20,15 @@ class CharacterPresenterTest {
                 }
         )
         val presenter = CharacterProfilePresenter(view, exampleCharacter)
+        // When
         presenter.onViewCreated()
+        // Then
         assertEquals(exampleCharacter.imageUrl, requestedImage)
     }
 
     @Test
     fun `Correct user name and description displayed`() {
+        // Given
         var displayedName: String? = null
         var displayedDescription: String? = null
         val view = BaseCharacterProfileView(
@@ -34,13 +38,16 @@ class CharacterPresenterTest {
                 }
         )
         val presenter = CharacterProfilePresenter(view, exampleCharacter)
+        // When
         presenter.onViewCreated()
+        // Then
         assertEquals(exampleCharacter.name, displayedName)
         assertEquals(exampleCharacter.description, displayedDescription)
     }
 
     @Test
     fun `Occurrences field is displaying all data about comics, series, stories and events`() {
+        // Given
         var displayedOccurrences: String? = null
         val view = BaseCharacterProfileView(
                 onSetUpCharacterData = { _, _, occurrences ->
@@ -48,7 +55,9 @@ class CharacterPresenterTest {
                 }
         )
         val presenter = CharacterProfilePresenter(view, exampleCharacter)
+        // When
         presenter.onViewCreated()
+        // Then
         assertNotNull(displayedOccurrences)
         assertTrue(exampleCharacter.comics.all { it in displayedOccurrences!! })
         assertTrue(exampleCharacter.series.all { it in displayedOccurrences!! })
@@ -58,6 +67,7 @@ class CharacterPresenterTest {
 
     @Test
     fun `Occurrences is using correct string ids`() {
+        // Given
         val stringsItShouldUse = listOf(
                 R.string.occurrences_comics_list_introduction,
                 R.string.occurrences_series_list_introduction,
@@ -73,7 +83,9 @@ class CharacterPresenterTest {
                 onGetStringById = idAsString
         )
         val presenter = CharacterProfilePresenter(view, exampleCharacter)
+        // When
         presenter.onViewCreated()
+        // Then
         assertNotNull(displayedOccurrences)
         assertTrue(stringsItShouldUse.map(idAsString).all { id -> id in displayedOccurrences!! })
     }
