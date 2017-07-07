@@ -19,7 +19,7 @@ dependencies:
 test:
   pre:
   # emulator startup need some minutes that's why start it before first build/test steps for build speed up
-    - emulator -avd circleci-android25 -no-audio -no-window:
+    - emulator -avd circleci-android25 -no-window:
         background: true
         parallel: true
 
