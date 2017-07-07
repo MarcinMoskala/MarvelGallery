@@ -7,7 +7,6 @@ dependencies:
   pre:
     # Install the android packages
     - echo y | android update sdk --no-ui --all --filter "extra-google-market_licensing,extra-google-play_billing"
-    #  [HINT] Almost packages are pre installed: https://circleci.com/docs/build-image-precise/#android
   post:
     # Create the android emulator
     - echo n | android create avd -n test_android_17 -f -t android-17
