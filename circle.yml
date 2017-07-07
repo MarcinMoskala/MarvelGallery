@@ -32,7 +32,7 @@ test:
     override:
       - (./gradlew assemble):
           timeout: 360
-      - ( ./gradlew jacocoFullReport):
+      - ( ./gradlew jacocoTestReport):
           timeout: 360
       # copy the build outputs to artifacts
       - cp -r app/build/outputs $CIRCLE_ARTIFACTS
