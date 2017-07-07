@@ -13,11 +13,6 @@ test:
     # Build the code
     - ./gradlew app:assembleDebug
 
-    # start wiremock to support tests with network communication
-    - tools/src/main/resources/start-wiremock.sh:
-          # start at background to use wiremock in next build steps
-          background: true
-
     # Build instrumented test code
     # fix apk not build https://code.google.com/p/android/issues/detail?id=180689
     - ./gradlew assembleDebug
