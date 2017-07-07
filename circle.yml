@@ -13,6 +13,10 @@ machine:
     _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
   java:
     version: oraclejdk8
+  docker:
+    - image: circleci/android:api-25-alpha
+  environment:
+    JVM_OPTS: -Xmx3200m
 
 dependencies:
     pre:
