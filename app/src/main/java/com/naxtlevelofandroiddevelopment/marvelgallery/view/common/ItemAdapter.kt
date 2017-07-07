@@ -6,12 +6,12 @@ import android.view.View
 
 abstract class ItemAdapter<T : RecyclerView.ViewHolder>(@LayoutRes open val layoutId: Int) {
 
-    var holder: T? = null
+    protected var holder: T? = null
 
     abstract fun onCreateViewHolder(itemView: View): T
 
     @Suppress("UNCHECKED_CAST")
-    fun onBindBaseViewHolder(holder: RecyclerView.ViewHolder) {
+    fun bindBaseViewHolder(holder: RecyclerView.ViewHolder) {
         this.holder = holder as T
         holder.onBindViewHolder()
     }

@@ -10,10 +10,10 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.ItemAdapter
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.bindView
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.loadImage
 
-class CategoryItemAdapter(
+class CharacterItemAdapter(
         val character: MarvelCharacter,
         val clicked: (MarvelCharacter) -> Unit
-) : ItemAdapter<CategoryItemAdapter.ViewHolder>(R.layout.item_main) {
+) : ItemAdapter<CharacterItemAdapter.ViewHolder>(R.layout.item_main) {
 
     override fun onCreateViewHolder(itemView: View) = ViewHolder(itemView)
 

@@ -12,6 +12,10 @@ class MainPresenter(val view: MainView, val repository: MarvelRepository) : Base
         loadCharacters()
     }
 
+    fun onRefresh() {
+        loadCharacters()
+    }
+
     fun onSearchChanged(newText: String) {
         loadCharacters(newText)
     }
@@ -21,7 +25,6 @@ class MainPresenter(val view: MainView, val repository: MarvelRepository) : Base
         subscriptions += repository
                 .getAllCharacters(qualifiedSearchQuery)
                 .applySchedulers()
-                .retry()
                 .smartSubscribe(
                         onStart = { view.refresh = true },
                         onSuccess = view::show,

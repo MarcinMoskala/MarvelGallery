@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-open class BaseRecyclerViewAdapter<in T : ItemAdapter<out RecyclerView.ViewHolder>>(
+open class BaseRecyclerListAdapter<in T : ItemAdapter<out RecyclerView.ViewHolder>>(
         private val items: MutableList<T>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -18,6 +18,6 @@ open class BaseRecyclerViewAdapter<in T : ItemAdapter<out RecyclerView.ViewHolde
     }
 
     override final fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        items[position].onBindBaseViewHolder(holder)
+        items[position].bindBaseViewHolder(holder)
     }
 }

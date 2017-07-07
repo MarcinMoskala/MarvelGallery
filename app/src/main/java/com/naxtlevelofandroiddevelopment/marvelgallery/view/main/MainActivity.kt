@@ -2,7 +2,6 @@ package com.naxtlevelofandroiddevelopment.marvelgallery.view.main
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.Window
 import com.naxtlevelofandroiddevelopment.marvelgallery.R
 import com.naxtlevelofandroiddevelopment.marvelgallery.data.MarvelRepository
@@ -24,7 +23,7 @@ class MainActivity : BaseActivityWithPresenter(), MainView {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_main)
-        recyclerView.layoutManager = GridLayoutManager(this, 2) as RecyclerView.LayoutManager
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
         swipeRefreshView.setOnRefreshListener { presenter.onSearchChanged(searchView.text.toString()) }
         searchView.addOnTextChangedListener { newText -> presenter.onSearchChanged(newText) }
         presenter.onViewCreated()
@@ -41,7 +40,7 @@ class MainActivity : BaseActivityWithPresenter(), MainView {
     }
 
     private fun createCategoryItemAdapter(character: MarvelCharacter)
-            = CategoryItemAdapter(character, { showHeroProfile(character) })
+            = CharacterItemAdapter(character, { showHeroProfile(character) })
 
     private fun showHeroProfile(character: MarvelCharacter) {
         CharacterProfileActivity.start(this, character)

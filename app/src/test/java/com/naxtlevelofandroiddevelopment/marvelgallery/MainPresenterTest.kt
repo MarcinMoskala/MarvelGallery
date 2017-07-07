@@ -9,74 +9,81 @@ import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCh
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.fail
 import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import java.util.concurrent.Semaphore
-import java.util.concurrent.TimeUnit.SECONDS
 
 
 class MainPresenterTest {
 
+    /* We need to define trampoline schedulers to be sure that all
+       reactive operations will be called before test will finish */
     @Before
     fun setUp() {
-        RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.io() }
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
     }
 
     @Test
-    fun `After start, there is request for with null query`() {
-        assertOnAction { onViewCreated() } searchQueryIsEqualTo null
+    fun `Returned list is shown after view was created`() {
+        assertOnAction { onViewCreated() }.thereIsSameListDisplayed()
     }
 
     @Test
-    fun `For blank text, there is request with null query`() {
-        assertOnAction { onSearchChanged("") } searchQueryIsEqualTo null
-        assertOnAction { onSearchChanged("   ") } searchQueryIsEqualTo null
-        assertOnAction { onSearchChanged("         ") } searchQueryIsEqualTo null
+    fun `New list is shown after view was refreshed`() {
+        assertOnAction { onRefresh() }.thereIsSameListDisplayed()
     }
 
     @Test
-    fun `Search query is the same as provided text when not blank`() {
-        for (text in listOf("KKO", "HJ HJ", "And so what?"))
-            assertOnAction { onSearchChanged(text) } searchQueryIsEqualTo text
-    }
-
-    @Test
-    fun `Returned list is shown`() {
+    fun `Error from API is displayed`() {
         // Given
-        val sem = Semaphore(0)
+        val someError = Error()
+        var errorDisplayed: Throwable? = null
         val view = BaseMainView(
-                onShow = { list ->
-                    // Then
-                    assertEquals(exampleCharacterList, list)
-                    sem.release()
-                },
-                onShowError = { fail() }
+                onShow = { _ -> fail() },
+                onShowError = { errorDisplayed = it }
         )
-        val marvelRepository = BaseMarvelRepository { Single.just(exampleCharacterList) }
+        val marvelRepository = BaseMarvelRepository { Single.error(someError) }
         val mainPresenter = MainPresenter(view, marvelRepository)
         // When
         mainPresenter.onViewCreated()
-        sem.tryAcquire(1, SECONDS)
+        // Then
+        assertEquals(someError, errorDisplayed)
     }
 
-    private class PresenterActionAssertion(val actionOnPresenter: MainPresenter.() -> Unit) {
-
-        infix fun searchQueryIsEqualTo(expectedQuery: String?) {
-            var checkApplied = false
-            val view = BaseMainView(onShowError = { fail() })
-            val marvelRepository = BaseMarvelRepository { searchQuery ->
-                assertEquals(expectedQuery, searchQuery)
-                checkApplied = true
-                Single.never()
-            }
-            val mainPresenter = MainPresenter(view, marvelRepository)
-            mainPresenter.actionOnPresenter()
-            assertTrue(checkApplied)
+    @Test
+    fun `There is refresh visible when data are loaded`() {
+        // Given
+        val view = BaseMainView()
+        view.refresh = false
+        val marvelRepository = BaseMarvelRepository { Single.just(exampleCharacterList) }
+        val mainPresenter = MainPresenter(view, marvelRepository)
+        view.onShow = { _ ->
+            // Then
+            assertTrue(view.refresh)
         }
+        // When
+        mainPresenter.onViewCreated()
+        // Then
+        assertFalse(view.refresh)
     }
 
     private fun assertOnAction(action: MainPresenter.() -> Unit) = PresenterActionAssertion(action)
+
+    private class PresenterActionAssertion(val actionOnPresenter: MainPresenter.() -> Unit) {
+
+        fun thereIsSameListDisplayed() {
+            val view = BaseMainView(
+                    onShow = { list -> assertEquals(exampleCharacterList, list) },
+                    onShowError = { fail() }
+            )
+            val marvelRepository = BaseMarvelRepository { Single.just(exampleCharacterList) }
+            val mainPresenter = MainPresenter(view, marvelRepository)
+            mainPresenter.actionOnPresenter()
+        }
+    }
 }

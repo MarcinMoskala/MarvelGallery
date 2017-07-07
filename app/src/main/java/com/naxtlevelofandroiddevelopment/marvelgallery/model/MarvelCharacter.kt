@@ -7,11 +7,11 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.data.network.dto.Characte
 data class MarvelCharacter(
         val name: String,
         val imageUrl: String,
-        val description: String,
-        val comics: List<String>,
-        val series: List<String>,
-        val stories: List<String>,
-        val events: List<String>
+        val description: String = "",
+        val comics: List<String> = listOf(),
+        val series: List<String> = listOf(),
+        val stories: List<String> = listOf(),
+        val events: List<String> = listOf()
 ) : Parcelable {
 
     constructor(dto: CharacterMarvelDto) : this(

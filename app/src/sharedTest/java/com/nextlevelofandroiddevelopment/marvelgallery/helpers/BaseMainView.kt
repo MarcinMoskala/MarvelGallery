@@ -4,7 +4,7 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.main.MainView
 
 class BaseMainView(
-        val onShow: (items: List<MarvelCharacter>) -> Unit = {},
+        var onShow: (items: List<MarvelCharacter>) -> Unit = {},
         val onShowError: (error: Throwable) -> Unit = {}
 ) : MainView {
 
