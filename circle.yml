@@ -1,47 +1,50 @@
-#
-# Build configuration for Circle CI
-#
-
-general:
-  artifacts:
-    - /home/ubuntu/AndroidApp/app/build/outputs/apk/
-
 machine:
-  environment:
-    ANDROID_HOME: /usr/local/android-sdk-linux
-    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
-    _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
   java:
     version: oraclejdk8
-  docker:
-    - image: circleci/android:api-25-alpha
-  environment:
-    JVM_OPTS: -Xmx3200m
-
-dependencies:
-    pre:
-      - echo y | android update sdk --no-ui --all --filter tools,platform-tools,android-25
-      - echo y | android update sdk --no-ui --all --filter build-tools-25.0.3
-      - echo y | android update sdk --no-ui --all --filter android-25
-      - echo y | android update sdk --no-ui --all --filter tools
-      - echo y | android update sdk --no-ui --all --filter extra-android-m2repository
-      - echo y | android update sdk --no-ui --all --filter extra-android-support
-      - echo y | android update sdk --no-ui --all --filter extra-google-google_play_services
-      - echo y | android update sdk --no-ui --all --filter extra-google-m2repository
-    override:
-      - chmod +x gradlew
-      - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
 
 test:
-    override:
-      - (./gradlew assemble):
-          timeout: 360
-      - ( ./gradlew connectedCheck):
-          timeout: 360
-      - ( ./gradlew jacocoTestReport):
-          timeout: 360
-      # copy the build outputs to artifacts
-      - cp -r app/build/outputs $CIRCLE_ARTIFACTS
+  pre:
+  # emulator startup need some minutes that's why start it before first build/test steps for build speed up
+    - emulator -avd circleci-android25 -no-audio -no-window:
+        background: true
+        parallel: true
 
-    post:
-      - bash <(curl -s https://codecov.io/bash)
+  override:
+    # Build the code
+    - ./gradlew app:assembleDebug
+
+    # start wiremock to support tests with network communication
+    - tools/src/main/resources/start-wiremock.sh:
+          # start at background to use wiremock in next build steps
+          background: true
+
+    # Build instrumented test code
+    # fix apk not build https://code.google.com/p/android/issues/detail?id=180689
+    - ./gradlew assembleDebug
+
+    # ensure that the emulator is ready to use
+    - circle-android wait-for-boot
+    # the necessary sleep duration may change with time and depends on the pre tasks length.
+    # When all pre tasks are run long enough then waiting will not be necessary anymore.
+    # This sleep should avoid the com.android.builder.testing.api.DeviceException: com.android.ddmlib.ShellCommandUnresponsiveException
+    - sleep 60
+    # at least remove the look screen
+    - adb shell input keyevent 82
+
+    # later we collect the logs from test run
+    - adb logcat -d
+
+    # execute tests on emulator
+    - ./gradlew connectedCheck
+
+    # Create coverage report
+    - ./gradlew jacocoTestReport
+
+    # copy test results
+    - mv app/build/reports/tests/debug $CIRCLE_TEST_REPORTS/AppUnitTests
+    - mv build/reports/jacoco/test/html $CIRCLE_TEST_REPORTS/CodeCoverageReport
+
+    # circleCi proper test value feature
+    - mkdir $CIRCLE_TEST_REPORTS/junit
+    - find */build/test-results -name "*.xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    - find */build/outputs/androidTest-results/ -name "*.xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
