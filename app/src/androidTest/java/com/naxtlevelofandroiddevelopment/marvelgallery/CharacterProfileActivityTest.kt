@@ -1,6 +1,7 @@
 package com.naxtlevelofandroiddevelopment.marvelgallery
 
 
+import android.support.test.InstrumentationRegistry.getInstrumentation
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
@@ -25,10 +26,16 @@ class CharacterProfileActivityTest {
 
     @Test
     fun characterActivityTest() {
+        val context = getInstrumentation().targetContext
         val character = Example.exampleCharacter
-        activityTestRule.launchActivity(CharacterProfileActivity.getPureIntent(character))
+        activityTestRule.launchActivity(CharacterProfileActivity.getIntent(context, character))
 
+        // Character name is displayed
         onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.toolbar))))
                 .check(matches(withText(character.name)))
+
+        // Character description is displayed
+        onView(withId(R.id.descriptionView))
+                .check(matches(withText(character.description)))
     }
 }

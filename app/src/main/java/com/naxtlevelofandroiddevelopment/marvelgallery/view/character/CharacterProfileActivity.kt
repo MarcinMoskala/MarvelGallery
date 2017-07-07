@@ -48,9 +48,6 @@ class CharacterProfileActivity : BaseActivityWithPresenter(), CharacterProfileVi
 
         private val CHARACTER_ARG = "com.naxtlevelofandroiddevelopment.marvelgallery.presentation.heroprofile.CharacterArgKey"
 
-        fun getPureIntent(character: MarvelCharacter): Intent = Intent()
-                .apply { putExtra(CHARACTER_ARG, character) }
-
         fun getIntent(context: Context, character: MarvelCharacter): Intent = context
                 .getIntent<CharacterProfileActivity>()
                 .apply { putExtra(CHARACTER_ARG, character) }

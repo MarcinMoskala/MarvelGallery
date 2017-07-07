@@ -24,7 +24,7 @@ class MainActivity : BaseActivityWithPresenter(), MainView {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_main)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
-        swipeRefreshView.setOnRefreshListener { presenter.onSearchChanged(searchView.text.toString()) }
+        swipeRefreshView.setOnRefreshListener { presenter.onRefresh() }
         searchView.addOnTextChangedListener { newText -> presenter.onSearchChanged(newText) }
         presenter.onViewCreated()
     }

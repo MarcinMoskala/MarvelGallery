@@ -64,11 +64,11 @@ class MainActivityTest {
         activityTestRule.launchActivity(Intent())
     }
 
-    fun assertIsVisibleText(text: String) {
+    private fun assertIsVisibleText(text: String) {
         onView(withText(text)).check(matches(isDisplayed()))
     }
 
-    fun assertIsNotVisibleText(text: String) {
+    private fun assertIsNotVisibleText(text: String) {
         try {
             onView(withText(text)).check(matches(not(isDisplayed())))
             assert(false) { "$text is displayed and is should not be" }
