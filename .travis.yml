@@ -9,9 +9,6 @@ android:
    - extra-android-m2repository
    - sys-img-armeabi-v7a-android-16
 
-notifications:
-  slack: conference-chat:kWqCkbSTDaTTgY4LBMM1F9IB
-
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
@@ -20,4 +17,4 @@ before_script:
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - sleep 10
-- adb shell input keyevent 82
+  - adb shell input keyevent 82
