@@ -1,0 +1,23 @@
+language: android
+jdk: oraclejdk8
+android:
+ components:
+   - tools
+   - platform-tools
+   - build-tools-25.0.2
+   - android-25
+   - extra-android-m2repository
+   - sys-img-armeabi-v7a-android-16
+
+notifications:
+  slack: conference-chat:kWqCkbSTDaTTgY4LBMM1F9IB
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+before_script:
+  - echo no | android create avd --force -n test -t android-18 --abi armeabi-v7a
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - sleep 10
+- adb shell input keyevent 82
