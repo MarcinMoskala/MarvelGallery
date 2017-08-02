@@ -3,5 +3,6 @@
 package com.naxtlevelofandroiddevelopment.marvelgallery.view.common
 
 import android.support.v7.widget.RecyclerView
+import android.view.View
 
-fun <T> RecyclerView.ViewHolder.bindView(viewId: Int) = lazy { itemView.findViewById(viewId) as T }
+fun <T : View> RecyclerView.ViewHolder.bindView(viewId: Int) = lazy { itemView.findViewById<T>(viewId) }
