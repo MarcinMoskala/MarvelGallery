@@ -13,7 +13,7 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.loadImage
 class CharacterItemAdapter(
         val character: MarvelCharacter,
         val clicked: (MarvelCharacter) -> Unit
-) : ItemAdapter<CharacterItemAdapter.ViewHolder>(R.layout.item_main) {
+) : ItemAdapter<CharacterItemAdapter.ViewHolder>(R.layout.item_character) {
 
     override fun onCreateViewHolder(itemView: View) = ViewHolder(itemView)
 

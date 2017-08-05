@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-open class BaseRecyclerListAdapter<in T : ItemAdapter<out RecyclerView.ViewHolder>>(
+open class RecyclerListAdapter<in T : ItemAdapter<out RecyclerView.ViewHolder>>(
         private val items: MutableList<T>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
