@@ -11,30 +11,16 @@ import org.junit.Test
 class CharacterPresenterTest {
 
     @Test
-    fun `Image Url is requested to be shown as an image`() {
-        // Given
-        var requestedImage: String? = null
-        val view = BaseCharacterProfileView(
-                onSetUpCharacterImage = {
-                    requestedImage = it
-                }
-        )
-        val presenter = CharacterProfilePresenter(view, exampleCharacter)
-        // When
-        presenter.onViewCreated()
-        // Then
-        assertEquals(exampleCharacter.imageUrl, requestedImage)
-    }
-
-    @Test
     fun `Correct user name and description displayed`() {
         // Given
         var displayedName: String? = null
         var displayedDescription: String? = null
+        var requestedImage: String? = null
         val view = BaseCharacterProfileView(
-                onSetUpCharacterData = { name, description, _ ->
+                onSetUpCharacterData = { name, description, image, _ ->
                     displayedName = name
                     displayedDescription = description
+                    requestedImage = image
                 }
         )
         val presenter = CharacterProfilePresenter(view, exampleCharacter)
@@ -43,6 +29,7 @@ class CharacterPresenterTest {
         // Then
         assertEquals(exampleCharacter.name, displayedName)
         assertEquals(exampleCharacter.description, displayedDescription)
+        assertEquals(exampleCharacter.imageUrl, requestedImage)
     }
 
     @Test
@@ -50,7 +37,7 @@ class CharacterPresenterTest {
         // Given
         var displayedOccurrences: String? = null
         val view = BaseCharacterProfileView(
-                onSetUpCharacterData = { _, _, occurrences ->
+                onSetUpCharacterData = { _, _, _, occurrences ->
                     displayedOccurrences = occurrences
                 }
         )
@@ -77,7 +64,7 @@ class CharacterPresenterTest {
         val idAsString = { id: Int -> "$id" }
         var displayedOccurrences: String? = null
         val view = BaseCharacterProfileView(
-                onSetUpCharacterData = { _, _, occurrences ->
+                onSetUpCharacterData = { _, _, _, occurrences ->
                     displayedOccurrences = occurrences
                 },
                 onGetStringById = idAsString

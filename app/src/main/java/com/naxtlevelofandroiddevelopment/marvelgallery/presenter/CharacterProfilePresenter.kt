@@ -10,10 +10,10 @@ class CharacterProfilePresenter(val view: CharacterProfileView, val character: M
     private val htmlEnter = "<br/>"
 
     fun onViewCreated() {
-        view.setUpCharacterImage(character.imageUrl)
         view.setUpCharacterData(
                 name = character.name,
                 description = character.description,
+                photoUrl = character.imageUrl,
                 occurrences = makeOccurrencesText()
         )
     }

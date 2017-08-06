@@ -2,6 +2,7 @@
 
 package com.naxtlevelofandroiddevelopment.marvelgallery
 
+import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.MainPresenter
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.BaseMainView
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.BaseMarvelRepository
@@ -29,7 +30,7 @@ class MainPresenterTest {
     }
 
     @Test
-    fun `Returned list is shown after view was created`() {
+    fun `After view was created, list of characters is loaded and displayed`() {
         assertOnAction { onViewCreated() }.thereIsSameListDisplayed()
     }
 
@@ -39,7 +40,7 @@ class MainPresenterTest {
     }
 
     @Test
-    fun `Error from API is displayed`() {
+    fun `When API returns error, it is displayed on view`() {
         // Given
         val someError = Error()
         var errorDisplayed: Throwable? = null
@@ -56,11 +57,18 @@ class MainPresenterTest {
     }
 
     @Test
-    fun `There is refresh visible when data are loaded`() {
+    fun `When presenter is waiting for response, refresh is displayed`() {
         // Given
-        val view = BaseMainView()
-        view.refresh = false
-        val marvelRepository = BaseMarvelRepository { Single.just(exampleCharacterList) }
+        val view = BaseMainView(refresh = false)
+        val marvelRepository = BaseMarvelRepository(
+                onGetCharacters = {
+                    Single.fromCallable {
+                        // Then
+                        assertTrue(view.refresh)
+                        exampleCharacterList
+                    }
+                }
+        )
         val mainPresenter = MainPresenter(view, marvelRepository)
         view.onShow = { _ ->
             // Then
@@ -72,18 +80,26 @@ class MainPresenterTest {
         assertFalse(view.refresh)
     }
 
+
     private fun assertOnAction(action: MainPresenter.() -> Unit) = PresenterActionAssertion(action)
 
     private class PresenterActionAssertion(val actionOnPresenter: MainPresenter.() -> Unit) {
 
         fun thereIsSameListDisplayed() {
+            // Given
+            var displayedList: List<MarvelCharacter>? = null
             val view = BaseMainView(
-                    onShow = { list -> assertEquals(exampleCharacterList, list) },
+                    onShow = { list -> displayedList = list },
                     onShowError = { fail() }
             )
             val marvelRepository = BaseMarvelRepository { Single.just(exampleCharacterList) }
             val mainPresenter = MainPresenter(view, marvelRepository)
+
+            // When
             mainPresenter.actionOnPresenter()
+
+            // Then
+            assertEquals(exampleCharacterList, displayedList)
         }
     }
 }

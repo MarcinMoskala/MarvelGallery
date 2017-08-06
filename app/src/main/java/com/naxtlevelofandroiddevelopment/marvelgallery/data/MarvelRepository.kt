@@ -1,7 +1,6 @@
 package com.naxtlevelofandroiddevelopment.marvelgallery.data
 
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
-import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.Provider
 import io.reactivex.Single
 
 interface MarvelRepository {

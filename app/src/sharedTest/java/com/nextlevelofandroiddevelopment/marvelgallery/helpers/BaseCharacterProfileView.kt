@@ -3,17 +3,12 @@ package com.nextlevelofandroiddevelopment.marvelgallery.helpers
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.character.CharacterProfileView
 
 class BaseCharacterProfileView(
-        val onSetUpCharacterImage: (photoUrl: String) -> Unit = {},
-        val onSetUpCharacterData: (name: String, description: String, occurrences: String) -> Unit = { _, _, _ -> },
+        val onSetUpCharacterData: (name: String, description: String, photoUrl: String, occurrences: String) -> Unit = { _, _, _, _ -> },
         val onGetStringById: (id: Int) -> String = { "" }
 ) : CharacterProfileView {
 
-    override fun setUpCharacterImage(photoUrl: String) {
-        onSetUpCharacterImage(photoUrl)
-    }
-
-    override fun setUpCharacterData(name: String, description: String, occurrences: String) {
-        onSetUpCharacterData(name, description, occurrences)
+    override fun setUpCharacterData(name: String, description: String, photoUrl: String, occurrences: String) {
+        onSetUpCharacterData(name, description, photoUrl, occurrences)
     }
 
     override fun getStringById(id: Int): String = onGetStringById(id)

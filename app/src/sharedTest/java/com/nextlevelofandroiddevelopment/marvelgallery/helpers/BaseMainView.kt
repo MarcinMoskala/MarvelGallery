@@ -5,10 +5,9 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.view.main.MainView
 
 class BaseMainView(
         var onShow: (items: List<MarvelCharacter>) -> Unit = {},
-        val onShowError: (error: Throwable) -> Unit = {}
+        val onShowError: (error: Throwable) -> Unit = {},
+        override var refresh: Boolean = false
 ) : MainView {
-
-    override var refresh: Boolean = false
 
     override fun show(items: List<MarvelCharacter>) {
         onShow(items)

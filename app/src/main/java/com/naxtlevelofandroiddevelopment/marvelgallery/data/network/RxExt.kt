@@ -8,7 +8,6 @@ import io.reactivex.schedulers.Schedulers
 
 fun <T> Single<T>.applySchedulers(): Single<T> = this
         .subscribeOn(Schedulers.io())
-        .unsubscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 
 fun <T> Single<T>.smartSubscribe(
@@ -16,12 +15,10 @@ fun <T> Single<T>.smartSubscribe(
         onError: ((Throwable) -> Unit)? = null,
         onFinish: (() -> Unit)? = null,
         onSuccess: (T) -> Unit
-): Disposable =
-        addStartFinishActions(onStart, onFinish).subscribe(onSuccess, { onError?.invoke(it) })
-
-fun <T> Single<T>.addStartFinishActions(onStart: (() -> Unit)? = null, onFinish: (() -> Unit)? = null): Single<T> {
+): Disposable {
     onStart?.invoke()
     return doAfterTerminate { onFinish?.invoke() }
+            .subscribe(onSuccess, { onError?.invoke(it) })
 }
 
 operator fun CompositeDisposable.plusAssign(disposable: Disposable) {

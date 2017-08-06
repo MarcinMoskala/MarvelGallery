@@ -3,11 +3,15 @@ package com.naxtlevelofandroiddevelopment.marvelgallery.view.character
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.view.MenuItem
 import com.naxtlevelofandroiddevelopment.marvelgallery.R
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.CharacterProfilePresenter
-import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.*
+import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.BaseActivityWithPresenter
+import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.extra
+import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.getIntent
+import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.loadImage
 import kotlinx.android.synthetic.main.activity_character_profile.*
 
 class CharacterProfileActivity : BaseActivityWithPresenter(), CharacterProfileView {
@@ -22,15 +26,14 @@ class CharacterProfileActivity : BaseActivityWithPresenter(), CharacterProfileVi
         presenter.onViewCreated()
     }
 
-    override fun setUpCharacterImage(photoUrl: String) {
+    override fun setUpCharacterData(name: String, description: String, photoUrl: String, occurrences: String) {
+        supportActionBar?.title = name
+        descriptionView.text = description
+        occurrencesView.text = Html.fromHtml(occurrences)
         headerView.loadImage(photoUrl, centerCropped = true)
     }
 
-    override fun setUpCharacterData(name: String, description: String, occurrences: String) {
-        supportActionBar?.title = name
-        descriptionView.text = description
-        occurrencesView.setHtmlText(occurrences)
-    }
+    override fun getStringById(id: Int) = getString(id) ?: throw Error("No string with such id")
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when {
         item.itemId == android.R.id.home -> onBackPressed().let { true }
@@ -41,8 +44,6 @@ class CharacterProfileActivity : BaseActivityWithPresenter(), CharacterProfileVi
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
-
-    override fun getStringById(id: Int) = getString(id) ?: throw Error("No string with such id")
 
     companion object {
 

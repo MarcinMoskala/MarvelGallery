@@ -8,5 +8,5 @@ class BaseMarvelRepository(
         val onGetCharacters: (String?) -> Single<List<MarvelCharacter>>
 ) : MarvelRepository {
 
-    override fun getAllCharacters(searchQuery: String?): Single<List<MarvelCharacter>> = onGetCharacters(searchQuery)
+    override fun getAllCharacters(searchQuery: String?) = onGetCharacters(searchQuery)
 }

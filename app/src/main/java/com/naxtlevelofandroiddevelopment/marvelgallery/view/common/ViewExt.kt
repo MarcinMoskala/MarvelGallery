@@ -4,9 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
-import android.text.Html
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 
@@ -15,10 +13,6 @@ fun ImageView.loadImage(photoUrl: String, centerCropped: Boolean = false) {
             .load(photoUrl)
             .apply { if (centerCropped) centerCrop() }
             .into(this)
-}
-
-fun TextView.setHtmlText(html: String) {
-    text = Html.fromHtml(html)
 }
 
 fun Context.toast(text: String, length: Int = Toast.LENGTH_LONG) {
