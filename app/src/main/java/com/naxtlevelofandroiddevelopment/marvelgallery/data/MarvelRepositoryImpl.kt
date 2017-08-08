@@ -14,7 +14,7 @@ class MarvelRepositoryImpl : MarvelRepository {
             limit = elementsOnListLimit,
             searchQuery = searchQuery
     ).map {
-        it.data?.results?.map { MarvelCharacter(it) } ?: emptyList()
+        it.data?.results.orEmpty().map { MarvelCharacter(it) }
     }
 
     companion object {
