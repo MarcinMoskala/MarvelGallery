@@ -1,22 +1,20 @@
 package com.naxtlevelofandroiddevelopment.marvelgallery.view.character
 
-import android.content.Context
-import android.content.Intent
+import activitystarter.Arg
 import android.os.Bundle
 import android.text.Html
 import android.view.MenuItem
+import com.marcinmoskala.activitystarter.argExtra
 import com.naxtlevelofandroiddevelopment.marvelgallery.R
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.CharacterProfilePresenter
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.BaseActivityWithPresenter
-import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.extra
-import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.getIntent
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.loadImage
 import kotlinx.android.synthetic.main.activity_character_profile.*
 
 class CharacterProfileActivity : BaseActivityWithPresenter(), CharacterProfileView {
 
-    val character: MarvelCharacter by extra(CHARACTER_ARG)
+    @get:Arg val character: MarvelCharacter by argExtra()
     override val presenter by lazy { CharacterProfilePresenter(this, character) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,19 +41,5 @@ class CharacterProfileActivity : BaseActivityWithPresenter(), CharacterProfileVi
     private fun setUpToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    companion object {
-
-        private val CHARACTER_ARG = "com.naxtlevelofandroiddevelopment.marvelgallery.presentation.heroprofile.CharacterArgKey"
-
-        fun getIntent(context: Context, character: MarvelCharacter): Intent = context
-                .getIntent<CharacterProfileActivity>()
-                .apply { putExtra(CHARACTER_ARG, character) }
-
-        fun start(context: Context, character: MarvelCharacter) {
-            val intent = getIntent(context, character)
-            context.startActivity(intent)
-        }
     }
 }

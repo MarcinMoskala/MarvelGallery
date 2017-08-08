@@ -7,7 +7,7 @@ import com.naxtlevelofandroiddevelopment.marvelgallery.R
 import com.naxtlevelofandroiddevelopment.marvelgallery.data.MarvelRepository
 import com.naxtlevelofandroiddevelopment.marvelgallery.model.MarvelCharacter
 import com.naxtlevelofandroiddevelopment.marvelgallery.presenter.MainPresenter
-import com.naxtlevelofandroiddevelopment.marvelgallery.view.character.CharacterProfileActivity
+import com.naxtlevelofandroiddevelopment.marvelgallery.view.character.CharacterProfileActivityStarter
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.BaseActivityWithPresenter
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.addOnTextChangedListener
 import com.naxtlevelofandroiddevelopment.marvelgallery.view.common.bindToSwipeRefresh
@@ -47,6 +47,6 @@ class MainActivity : BaseActivityWithPresenter(), MainView {
             = CharacterItemAdapter(character, { showHeroProfile(character) })
 
     private fun showHeroProfile(character: MarvelCharacter) {
-        CharacterProfileActivity.start(this, character)
+        CharacterProfileActivityStarter.start(this, character)
     }
 }
