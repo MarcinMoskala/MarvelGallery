@@ -33,9 +33,8 @@ class MainPresenterSearchTest {
 
     @Test
     fun `For blank text, there is request with null query`() {
-        assertOnAction { onSearchChanged("") } searchQueryIsEqualTo null
-        assertOnAction { onSearchChanged("   ") } searchQueryIsEqualTo null
-        assertOnAction { onSearchChanged("         ") } searchQueryIsEqualTo null
+        for (emptyText in listOf("", "   ", "       "))
+            assertOnAction { onSearchChanged(emptyText) } searchQueryIsEqualTo null
     }
 
     @Test

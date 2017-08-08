@@ -20,6 +20,7 @@ import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCh
 import com.nextlevelofandroiddevelopment.marvelgallery.helpers.Example.exampleCharacterList
 import io.reactivex.Single
 import org.hamcrest.Matchers.not
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,16 +31,21 @@ class MainActivityTest {
 
     @Rule @JvmField val activityTestRule = ActivityTestRule(MainActivity::class.java, false, false)
 
+    @Before
+    fun setUp() {
+        MarvelRepository.override = BaseMarvelRepository(
+                onGetCharacters = { query -> Single.just(exampleCharacterList.filter { query == null || query in it.name }) }
+        )
+        activityTestRule.launchActivity(Intent())
+    }
+
     @Test
     fun There_is_character_list_visible() {
-        startWithDefaultFilteringRepository()
         assertIsVisibleText(exampleCharacter.name)
     }
 
     @Test
     fun I_see_only_searched_character_after_I_type_its_name_in_search_view() {
-        startWithDefaultFilteringRepository()
-
         onView(withId(R.id.searchView)).perform(replaceText(exampleCharacter.name.take(4)), closeSoftKeyboard())
         assertIsVisibleText(exampleCharacter.name)
 
@@ -51,17 +57,8 @@ class MainActivityTest {
 
     @Test
     fun On_character_clicked_there_is_character_activity_opened() {
-        startWithDefaultFilteringRepository()
-
         onView(withId(R.id.recyclerView)).perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
         onView(withId(R.id.character_detail_layout)).check(matches(isDisplayed()))
-    }
-
-    private fun startWithDefaultFilteringRepository() {
-        MarvelRepository.override = BaseMarvelRepository(
-                onGetCharacters = { query -> Single.just(exampleCharacterList.filter { query == null || query in it.name }) }
-        )
-        activityTestRule.launchActivity(Intent())
     }
 
     private fun assertIsVisibleText(text: String) {

@@ -81,12 +81,4 @@
         android:gravity="bottom|center"
         android:text="@string/marvel_copyright_notice" />
 
-    <ProgressBar
-        android:id="@+id/progressView"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
-
 </android.support.design.widget.CoordinatorLayout>
