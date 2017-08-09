@@ -21,8 +21,4 @@
         <item name="android:shadowRadius">3.0</item>
     </style>
 
-    <style name="ItemDetailTitle" parent="@style/TextAppearance.AppCompat.Small">
-        <item name="android:textColor">@color/colorAccent</item>
-    </style>
-
 </resources>

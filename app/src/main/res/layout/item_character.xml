@@ -1,4 +1,4 @@
-<com.kotlintest.marvelgallery.view.views.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sample.marvelgallery.view.views.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,8 +9,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/item_image_description" />
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -26,4 +25,4 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/standard_text_size"
         tools:text="Some name" />
-</com.kotlintest.marvelgallery.view.views.SquareFrameLayout>
+</com.sample.marvelgallery.view.views.SquareFrameLayout>

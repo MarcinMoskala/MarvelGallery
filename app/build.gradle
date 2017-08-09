@@ -7,7 +7,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
     defaultConfig {
-        applicationId "com.kotlintest.marvelgallery"
+        applicationId "com.sample.marvelgallery"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
