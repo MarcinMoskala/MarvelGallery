@@ -7,7 +7,8 @@ android:
    - build-tools-26.0.0
    - android-26
    - extra-android-m2repository
-   - sys-img-armeabi-v7a-android-16
+   - sys-img-armeabi-v7a-android-18
+   - build-tools-19.1.0
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
