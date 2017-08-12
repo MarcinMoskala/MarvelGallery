@@ -1,5 +1,9 @@
 language: android
 jdk: oraclejdk8
+env:
+  global:
+    - ANDROID_TARGET=android-15
+    - ANDROID_ABI=armeabi-v7a
 android:
  components:
    - tools
@@ -7,14 +11,13 @@ android:
    - build-tools-26.0.0
    - android-26
    - extra-android-m2repository
-   - sys-img-armeabi-v7a-android-18
-   - build-tools-19.1.0
+   - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 before_script:
-  - echo no | android create avd --force -n test -t android-18 --abi armeabi-v7a
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - sleep 10
