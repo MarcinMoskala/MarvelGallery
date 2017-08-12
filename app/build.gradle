@@ -12,6 +12,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "PUBLIC_KEY", "\"${marvelPublicKey}\"")
+        buildConfigField("String", "PRIVATE_KEY", "\"${marvelPrivateKey}\"")
     }
     buildTypes {
         release {
@@ -22,20 +25,27 @@ android {
 }
 
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$android_support_version"
-    implementation "com.android.support:design:$android_support_version"
-    implementation "com.android.support:support-v4:$android_support_version"
     implementation "com.android.support:recyclerview-v7:$android_support_version"
-
     implementation "com.github.bumptech.glide:glide:$glide_version"
 
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
 
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile 'junit:junit:4.12'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    // RxAndroid
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+
+    // Retrofit
+    implementation(["com.squareup.retrofit2:retrofit:$retrofit_version",
+                    "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+                    "com.squareup.retrofit2:converter-gson:$retrofit_version",
+                    "com.squareup.okhttp3:okhttp:$okhttp_version",
+                    "com.squareup.okhttp3:logging-interceptor:$okhttp_version"])
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
 }
 repositories {
     mavenCentral()
