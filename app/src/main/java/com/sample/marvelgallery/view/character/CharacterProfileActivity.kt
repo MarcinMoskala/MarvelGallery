@@ -3,7 +3,6 @@ package com.sample.marvelgallery.view.character
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Html
 import android.view.MenuItem
 import com.sample.marvelgallery.R
 import com.sample.marvelgallery.model.MarvelCharacter
@@ -22,7 +21,7 @@ class CharacterProfileActivity : BaseActivity() {
         setUpToolbar()
         supportActionBar?.title = character.name
         descriptionView.text = character.description
-        occurrencesView.text = Html.fromHtml(makeOccurrencesText())
+        occurrencesView.text = makeOccurrencesText()
         headerView.loadImage(character.imageUrl, centerCropped = true)
     }
 
@@ -42,8 +41,8 @@ class CharacterProfileActivity : BaseActivity() {
         fun addListIfNotEmpty(introductionTextId: Int, list: List<String>) {
             if (list.isEmpty()) return
             val introductionText = getString(introductionTextId)
-            val htmlList = list.toHtmlList()
-            occurrencesText += "$introductionText $htmlEnter $htmlList $htmlEnter"
+            val listText = list.joinToString (separator = "\n$bullet")
+            occurrencesText += "$introductionText\n$listText\n\n"
         }
 
         addListIfNotEmpty(R.string.occurrences_comics_list_introduction, character.comics)
@@ -54,11 +53,8 @@ class CharacterProfileActivity : BaseActivity() {
         return occurrencesText
     }
 
-    private fun List<String>.toHtmlList(): String = fold("") { acc, item -> "$acc$htmlPoint $item $htmlEnter" }
-
     companion object {
-        private const val htmlPoint = "&#8226;"
-        private const val htmlEnter = "<br/>"
+        private const val bullet = '\u2022'
         private const val CHARACTER_ARG = "com.naxtlevelofandroiddevelopment.marvelgallery.presentation.heroprofile.CharacterArgKey"
 
         fun getIntent(context: Context, character: MarvelCharacter): Intent = context
