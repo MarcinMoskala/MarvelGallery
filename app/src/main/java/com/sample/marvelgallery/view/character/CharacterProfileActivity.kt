@@ -41,7 +41,7 @@ class CharacterProfileActivity : BaseActivity() {
         fun addListIfNotEmpty(introductionTextId: Int, list: List<String>) {
             if (list.isEmpty()) return
             val introductionText = getString(introductionTextId)
-            val listText = list.joinToString (separator = "\n$bullet")
+            val listText = list.joinToString(transform = { " $bullet $it" }, separator = "\n")
             occurrencesText += "$introductionText\n$listText\n\n"
         }
 
