@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.view.Window
 import com.sample.marvelgallery.R
-import com.sample.marvelgallery.data.MarvelRepository
 import com.sample.marvelgallery.model.MarvelCharacter
 import kotlinx.android.synthetic.main.activity_main.*
 
