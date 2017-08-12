@@ -1,9 +1,8 @@
 package com.sample.marvelgallery.view.character
 
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Html
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.sample.marvelgallery.R
 import com.sample.marvelgallery.model.MarvelCharacter
@@ -22,7 +21,7 @@ class CharacterProfileActivity : AppCompatActivity() {
         setUpToolbar()
         supportActionBar?.title = character.name
         descriptionView.text = character.description
-        occurrencesView.text = Html.fromHtml(makeOccurrencesText())
+        occurrencesView.text = makeOccurrencesText()
         headerView.loadImage(character.imageUrl, centerCropped = true)
     }
 
@@ -36,36 +35,28 @@ class CharacterProfileActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun makeOccurrencesText(): String {
-        var occurrencesText = ""
+    private fun makeOccurrencesText(): String = ""
+            .addList(R.string.occurrences_comics_list_introduction, character.comics)
+            .addList(R.string.occurrences_series_list_introduction, character.series)
+            .addList(R.string.occurrences_stories_list_introduction, character.stories)
+            .addList(R.string.occurrences_events_list_introduction, character.events)
 
-        fun addListIfNotEmpty(introductionTextId: Int, list: List<String>) {
-            if (list.isEmpty()) return
-            val introductionText = getString(introductionTextId)
-            val htmlList = list.toHtmlList()
-            occurrencesText += "$introductionText $htmlEnter $htmlList $htmlEnter"
-        }
-
-        addListIfNotEmpty(R.string.occurrences_comics_list_introduction, character.comics)
-        addListIfNotEmpty(R.string.occurrences_series_list_introduction, character.series)
-        addListIfNotEmpty(R.string.occurrences_stories_list_introduction, character.stories)
-        addListIfNotEmpty(R.string.occurrences_events_list_introduction, character.events)
-
-        return occurrencesText
+    private fun String.addList(introductionTextId: Int, list: List<String>): String {
+        if (list.isEmpty()) return this
+        val introductionText = getString(introductionTextId)
+        val listText = list.joinToString(transform = { " $bullet $it" }, separator = "\n")
+        return this + "$introductionText\n$listText\n\n"
     }
 
     companion object {
-        private const val htmlPoint = "&#8226;"
-        private const val htmlEnter = "<br/>"
+        private const val bullet = '\u2022'
         private const val CHARACTER_ARG = "com.naxtlevelofandroiddevelopment.marvelgallery.presentation.heroprofile.CharacterArgKey"
 
         fun start(context: Context, character: MarvelCharacter) {
             val intent = context
-                    .getIntent<CharacterProfileActivity>() // 1
+                    .getIntent<CharacterProfileActivity>()
                     .apply { putExtra(CHARACTER_ARG, character) }
             context.startActivity(intent)
         }
-
-        private fun List<String>.toHtmlList(): String = fold("") { acc, item -> "$acc$htmlPoint $item $htmlEnter" }
     }
 }
