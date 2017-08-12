@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MarvelGallery</string>
     <string name="marvel_copyright_notice">Data provided by Marvel. © 2017 MARVEL</string>
+    <string name="search_hint">Search for character</string>
 </resources>

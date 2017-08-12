@@ -8,6 +8,7 @@ import com.sample.marvelgallery.data.MarvelRepository
 import com.sample.marvelgallery.model.MarvelCharacter
 import com.sample.marvelgallery.presenter.MainPresenter
 import com.sample.marvelgallery.view.common.BaseActivityWithPresenter
+import com.sample.marvelgallery.view.common.addOnTextChangedListener
 import com.sample.marvelgallery.view.common.bindToSwipeRefresh
 import com.sample.marvelgallery.view.common.toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,6 +24,11 @@ class MainActivity : BaseActivityWithPresenter(), MainView { // 1
         setContentView(R.layout.activity_main)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
         swipeRefreshView.setOnRefreshListener { presenter.onRefresh() } // 4
+        searchView.addOnTextChangedListener {
+            onTextChanged { text, _, _, _ ->
+                presenter.onSearchChanged(text)
+            }
+        }
         presenter.onViewCreated() // 4
     }
 
