@@ -1,4 +1,4 @@
-package com.sample.marvelgallery.data.network
+package com.sample.marvelgallery.data
 
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
