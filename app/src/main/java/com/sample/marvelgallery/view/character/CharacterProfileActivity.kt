@@ -1,20 +1,20 @@
 package com.sample.marvelgallery.view.character
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.sample.marvelgallery.R
 import com.sample.marvelgallery.model.MarvelCharacter
-import com.sample.marvelgallery.view.common.BaseActivity
 import com.sample.marvelgallery.view.common.extra
 import com.sample.marvelgallery.view.common.getIntent
 import com.sample.marvelgallery.view.common.loadImage
 import kotlinx.android.synthetic.main.activity_character_profile.*
 
-class CharacterProfileActivity : BaseActivity() {
+class CharacterProfileActivity : AppCompatActivity() {
 
     val character: MarvelCharacter by extra(CHARACTER_ARG)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character_profile)
@@ -35,29 +35,24 @@ class CharacterProfileActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun makeOccurrencesText(): String {
-        var occurrencesText = ""
+    private fun makeOccurrencesText(): String = ""
+            .addList(R.string.occurrences_comics_list_introduction, character.comics)
+            .addList(R.string.occurrences_series_list_introduction, character.series)
+            .addList(R.string.occurrences_stories_list_introduction, character.stories)
+            .addList(R.string.occurrences_events_list_introduction, character.events)
 
-        fun addListIfNotEmpty(introductionTextId: Int, list: List<String>) {
-            if (list.isEmpty()) return
-            val introductionText = getString(introductionTextId)
-            val listText = list.joinToString(transform = { " $bullet $it" }, separator = "\n")
-            occurrencesText += "$introductionText\n$listText\n\n"
-        }
-
-        addListIfNotEmpty(R.string.occurrences_comics_list_introduction, character.comics)
-        addListIfNotEmpty(R.string.occurrences_series_list_introduction, character.series)
-        addListIfNotEmpty(R.string.occurrences_stories_list_introduction, character.stories)
-        addListIfNotEmpty(R.string.occurrences_events_list_introduction, character.events)
-
-        return occurrencesText
+    private fun String.addList(introductionTextId: Int, list: List<String>): String {
+        if (list.isEmpty()) return this
+        val introductionText = getString(introductionTextId)
+        val listText = list.joinToString(transform = { " $bullet $it" }, separator = "\n")
+        return this + "$introductionText\n$listText\n\n"
     }
 
     companion object {
         private const val bullet = '\u2022'
-        private const val CHARACTER_ARG = "com.naxtlevelofandroiddevelopment.marvelgallery.presentation.heroprofile.CharacterArgKey"
+        private const val CHARACTER_ARG = "com.sample.marvelgallery.view.character.CharacterProfileActivity.CharacterArgKey"
 
-        fun getIntent(context: Context, character: MarvelCharacter): Intent = context
+        fun getIntent(context: Context, character: MarvelCharacter) = context
                 .getIntent<CharacterProfileActivity>()
                 .apply { putExtra(CHARACTER_ARG, character) }
 

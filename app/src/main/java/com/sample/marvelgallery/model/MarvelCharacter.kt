@@ -1,17 +1,20 @@
 package com.sample.marvelgallery.model
 
-import android.os.Parcel
+import android.annotation.SuppressLint
 import android.os.Parcelable
 import com.sample.marvelgallery.data.network.dto.CharacterMarvelDto
+import kotlinx.android.parcel.Parcelize
 
-data class MarvelCharacter(
+@SuppressLint("ParcelCreator")
+@Parcelize
+class MarvelCharacter(
         val name: String,
         val imageUrl: String,
-        val description: String = "",
-        val comics: List<String> = listOf(),
-        val series: List<String> = listOf(),
-        val stories: List<String> = listOf(),
-        val events: List<String> = listOf()
+        val description: String,
+        val comics: List<String>,
+        val series: List<String>,
+        val stories: List<String>,
+        val events: List<String>
 ) : Parcelable {
 
     constructor(dto: CharacterMarvelDto) : this(
@@ -23,35 +26,4 @@ data class MarvelCharacter(
             stories = dto.stories.items.map { it.name },
             events = dto.events.items.map { it.name }
     )
-
-    constructor(source: Parcel) : this(
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.createStringArrayList(),
-            source.createStringArrayList(),
-            source.createStringArrayList(),
-            source.createStringArrayList()
-    )
-
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        with(dest) {
-            writeString(name)
-            writeString(imageUrl)
-            writeString(description)
-            writeStringList(comics)
-            writeStringList(series)
-            writeStringList(stories)
-            writeStringList(events)
-        }
-    }
-
-    companion object {
-        @JvmField val CREATOR: Parcelable.Creator<MarvelCharacter> = object : Parcelable.Creator<MarvelCharacter> {
-            override fun createFromParcel(source: Parcel): MarvelCharacter = MarvelCharacter(source)
-            override fun newArray(size: Int): Array<MarvelCharacter?> = arrayOfNulls(size)
-        }
-    }
 }

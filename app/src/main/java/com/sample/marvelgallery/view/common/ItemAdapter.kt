@@ -9,7 +9,7 @@ abstract class ItemAdapter<T : RecyclerView.ViewHolder>(@LayoutRes open val layo
     abstract fun onCreateViewHolder(itemView: View): T
 
     @Suppress("UNCHECKED_CAST")
-    fun bindBaseViewHolder(holder: RecyclerView.ViewHolder) {
+    fun bindViewHolder(holder: RecyclerView.ViewHolder) {
         (holder as T).onBindViewHolder()
     }
 

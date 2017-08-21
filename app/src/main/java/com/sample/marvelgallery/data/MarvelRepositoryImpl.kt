@@ -18,7 +18,6 @@ class MarvelRepositoryImpl : MarvelRepository {
     }
 
     companion object {
-
         const val elementsOnListLimit = 50
     }
 }

@@ -10,16 +10,10 @@ fun <T> Single<T>.applySchedulers(): Single<T> = this
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 
-fun <T> Single<T>.smartSubscribe(
-        onStart: (() -> Unit)? = null,
+fun <T> Single<T>.subscribeBy(
         onError: ((Throwable) -> Unit)? = null,
-        onFinish: (() -> Unit)? = null,
         onSuccess: (T) -> Unit
-): Disposable {
-    onStart?.invoke()
-    return doAfterTerminate { onFinish?.invoke() }
-            .subscribe(onSuccess, { onError?.invoke(it) })
-}
+): Disposable = subscribe(onSuccess, { onError?.invoke(it) })
 
 operator fun CompositeDisposable.plusAssign(disposable: Disposable) {
     add(disposable)

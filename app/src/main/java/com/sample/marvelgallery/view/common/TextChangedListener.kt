@@ -5,9 +5,7 @@ import android.text.TextWatcher
 import android.widget.TextView
 
 fun TextView.addOnTextChangedListener(config: TextWatcherConfiguration.() -> Unit) {
-    val textWatcher = TextWatcherConfiguration()
-    textWatcher.config()
-    addTextChangedListener(textWatcher)
+    addTextChangedListener(TextWatcherConfiguration().apply { config() })
 }
 
 class TextWatcherConfiguration : TextWatcher {

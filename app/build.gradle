@@ -5,7 +5,7 @@ apply plugin: 'jacoco-android'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.sample.marvelgallery"
         minSdkVersion 15
@@ -21,6 +21,9 @@ android {
             buildConfigField("String", "PUBLIC_KEY", "\"${marvelPublicKey}\"")
             buildConfigField("String", "PRIVATE_KEY", "\"${marvelPrivateKey}\"")
         }
+    }
+    androidExtensions {
+        experimental = true
     }
     buildTypes {
         debug {
