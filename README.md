@@ -2,6 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/MarcinMoskala/MarvelGallery.svg?style=svg)](https://circleci.com/gh/MarcinMoskala/MarvelGallery)
 [![codebeat badge](https://codebeat.co/badges/7c7f9612-d562-43df-a676-70969e52bbd7)](https://codebeat.co/projects/github-com-marcinmoskala-marvelgallery-master)
+[![Analytics](https://ga-beacon.appspot.com/UA-92159206-7/main-page?pixel)](https://github.com/MarcinMoskala/MarvelGallery)
 
 Simple application, that is showing how Kotlin can be used to make Android development simpler and easier.
 Application is intentionally not using Dagger and only basic functionalities of RxJava, to keep this example simple and understandable to more programmers.
